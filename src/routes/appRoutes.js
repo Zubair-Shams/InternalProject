@@ -1,3 +1,4 @@
+import Brands from "pages/brands";
 import Offer from "pages/offer";
 import { lazy } from "react";
 
@@ -14,6 +15,7 @@ const appRoutes = [
   { path: "/register", element: <Register /> },
   { path: "/thankyou", element: <ThankYou /> },
   { path: "/offer", element: <Offer /> },
+  { path: "/brands", element: <Brands /> },
   { path: "*", element: <NotFound /> },
 ];
 
