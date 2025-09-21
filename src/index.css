@@ -1,13 +1,64 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  
+  font-family: "Oswald", sans-serif;
+}
+:root {
+  /* Extended color palette */
+  --orange: #f97316;
+  --lightOrange: #fb923c;
+  --extralightOrange: #fed7aa;
+  --verylightOrange: #ffedd5;
+  
+  --gray: #6b7280;
+  --lightGray: #d1d5db;
+  --extraLightGray: #f3f4f6;
+  --darkGray: #374151;
+  --grayMedium: #9ca3af;
+  
+  --lightSkyBlue: #0ea5e9;
+  --brightSkyBlue: #0284c7;
+  --tealBlue: #14b8a6;
+  
+  --oliveGreen: #84cc16;
+  --lightOliveGreen: #a3e635;
+  
+  --majesticPurple: #8b5cf6;
+  --danger: #ef4444;
+  
+  /* Theme colors */
+  --primary: #3b82f6;
+  --secondary: #64748b;
+  --accent: #f59e0b;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer base {
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  code {
+    font-family: 'Fira Code', 'Courier New', monospace;
+  }
 }
+
+/* @layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-white px-4 py-2 rounded-lg hover:bg-slate-600 transition-colors;
+  }
+  
+  .card {
+    @apply bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20;
+  }
+} */

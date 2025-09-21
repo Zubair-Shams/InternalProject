@@ -1,0 +1,39 @@
+import React from "react";
+
+// Layout Component with background
+const GameLayout = ({ children }) => {
+  return (
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/assets/images/GARDEN-BG-1.png')",
+        }}
+      ></div>
+
+      {/* Top Left Corner - Client Logo Placeholder */}
+      <div className="absolute top-4 left-4 z-20">
+        <div className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2">
+          <span className="text-gray-600 text-sm font-medium">CLIENT LOGO</span>
+        </div>
+      </div>
+
+      {/* Bottom Right Corner - Spin Stable Logo */}
+      <div className="absolute bottom-4 right-4 z-20">
+        <img
+          src="/assets/images/Spin Stable Logo Final Artwork BLK and WTE/SPIN STABLE LOGO Outlined BLK_FINAL-01.jpg"
+          alt="Spin Stable Logo"
+          className="w-16 h-16 object-contain"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-center items-center">
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export default GameLayout;
