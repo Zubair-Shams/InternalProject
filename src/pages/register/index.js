@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButterflyLeft from "assets/images/Butterfly-1.png";
+import MainCard from "components/mainCard.js";
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -21,32 +22,19 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    // Redirect to thank you page after successful submission
     navigate("/thankyou");
   };
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center px-4 ">
-      {/* Main Title */}
-      <h1 className="text-4xl md:text-5xl font-bold text-red-600 mb-8 text-center">
-        SPIN, WIN & SAVE
-      </h1>
-
-      {/* Registration Form */}
-      <div className="w-full max-w-md bg-orange relative">
+      <MainCard variant={"register"}>
         <img
           src={ButterflyLeft}
           alt="butterfly-left"
           className="absolute -top-7 -left-4 size-20"
         />
-        <form
-          onSubmit={handleSubmit}
-          className="rounded-lg p-6 shadow-lg"
-          style={{
-            backgroundColor: "#FF8C00",
-            border: "2px solid #F01414",
-          }}
-        >
+
+        <form onSubmit={handleSubmit}>
           {/* Form Header */}
           <p className="text-black text-lg font-medium mb-6 text-center">
             Please fill out your contact information below
@@ -111,7 +99,7 @@ const Register = () => {
             Tap to register
           </button>
         </form>
-      </div>
+      </MainCard>
     </div>
   );
 };

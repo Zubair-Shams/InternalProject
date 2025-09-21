@@ -29,7 +29,7 @@ const GameLayout = ({ children }) => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center items-center">
+      <div className="relative z-10 min-h-screen flex flex-col justify-center items-center w-full">
         {children}
       </div>
     </div>
