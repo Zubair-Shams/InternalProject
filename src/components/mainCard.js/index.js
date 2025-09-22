@@ -3,17 +3,28 @@ import ButterflyLeft from "assets/images/Butterfly-1.png";
 import ECU from "assets/images/Eco-Logo-1.png";
 import ButterflyBottom from "assets/images/Butterfly-7.png";
 import ButterflyRight from "assets/images/Butterfly-2.png";
+
+const VARIANTS_WITHOUT_TOP_LOGO = ["offer", "brands"];
+const VARIANTS_CHILD_ONLY = ["brands", "register"];
+
 const MainCard = ({
-  introText = "We'd like to say",
-  mainText = "THANK YOU",
-  closingText = "We hope you enjoy a fun day of shopping with your offer",
-  offerText = "20% off",
+  heading = "We'd like to say",
+  subHeading = "THANK YOU",
+  description = "We hope you enjoy a fun day of shopping with your offer",
+  offerLabel = "20% off",
   buttons = [],
   variant,
   children,
 }) => {
-  const NOT_TOP_LOGO = ["offer", "brands"];
-  const RENDER_ONLY_CHILD = ["brands", "register"];
+  // Pre-calculate split description for "offer" case
+  const offerSplitIndex = description.indexOf("offer?") + "offer?".length;
+  const descriptionPart1 =
+    offerSplitIndex > 0
+      ? description.substring(0, offerSplitIndex)
+      : description;
+  const descriptionPart2 =
+    offerSplitIndex > 0 ? description.substring(offerSplitIndex) : "";
+
   return (
     <div>
       <h1 className="text-4xl md:text-5xl font-bold text-red-600 mb-8 text-center">
@@ -26,7 +37,7 @@ const MainCard = ({
           borderColor: `#F01414`,
         }}
       >
-        {!NOT_TOP_LOGO.includes(variant) ? (
+        {!VARIANTS_WITHOUT_TOP_LOGO.includes(variant) ? (
           <img
             src={ButterflyLeft}
             alt="butterfly-left"
@@ -39,38 +50,33 @@ const MainCard = ({
         {variant === "thankyou" ? (
           <>
             <p className="text-white text-lg font-medium text-center mb-4">
-              {introText}
+              {heading}
             </p>
             <h2 className="text-black text-4xl md:text-6xl font-bold text-center mb-4">
-              {mainText}
+              {subHeading}
             </h2>
             <p className="text-white text-lg font-medium text-center">
-              {closingText}
+              {description}
             </p>
           </>
         ) : (
           ""
         )}
-        {RENDER_ONLY_CHILD.includes(variant) ? children : ""}
+        {VARIANTS_CHILD_ONLY.includes(variant) ? children : ""}
         {variant === "offer" ? (
           <>
             <p className="text-white text-xl font-medium text-center mb-2">
-              {mainText}
+              {subHeading}
             </p>
             <img src={ECU} alt="ECO" className=" size-20 w-44 block m-auto" />
             <p className="text-black text-4xl font-extrabold text-center">
-              {offerText}
+              {offerLabel}
             </p>
             <p className="text-white text-xl font-medium text-center">
-              {closingText.substring(
-                0,
-                closingText.indexOf("offer?") + "offer?".length
-              )}
+              {descriptionPart1}
             </p>
             <p className="text-white text-xl font-medium text-center">
-              {closingText.substring(
-                closingText.indexOf("offer?") + "offer?".length
-              )}
+              {descriptionPart2}
             </p>
             <div className="flex mt-2 mb-6 justify-between">
               {buttons.map((button) => (

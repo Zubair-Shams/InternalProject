@@ -22,6 +22,9 @@ const Brands = () => {
   return (
     <MainCard variant={"brands"}>
       <div className="relative">
+        <div className="text-center text-white/80 text-lg">
+          <p>Top 3 brands that interest you today:</p>
+        </div>
         <div className="flex flex-wrap justify-start  mb-6">
           {brands.map((brand, index) => (
             <div className="w-6/12 my-1">

@@ -5,8 +5,8 @@ const Offer = () => {
   return (
     <MainCard
       variant={"offer"}
-      mainText="Your Offer today is"
-      closingText="Not Loving this offer? Here's your chance to spin again"
+      subHeading="Your Offer today is"
+      description="Not Loving this offer? Here's your chance to spin again"
       buttons={[
         {
           title: "Tap to accept offer",
