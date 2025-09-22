@@ -8,7 +8,7 @@ import ecoLogo from "assets/images/Eco-Logo-1.png";
 import naturaLogo from "assets/images/Natura-Logo-1.png";
 import Tesla from "assets/images/Tesla-Logo-1.png";
 import MainCard from "components/mainCard.js";
-
+import ButterFluBottomLeft from "assets/images/Butterfly-3.png";
 const Brands = () => {
   const brands = [
     { id: "burberry", name: "BURBERRY", logo: burberryLogo },
@@ -21,32 +21,39 @@ const Brands = () => {
   ];
   return (
     <MainCard variant={"brands"}>
-      <div className="flex flex-wrap justify-start  mb-6">
-        {brands.map((brand, index) => (
-          <div className="w-6/12 my-1">
-            {/* <button
+      <div className="relative">
+        <div className="flex flex-wrap justify-start  mb-6">
+          {brands.map((brand, index) => (
+            <div className="w-6/12 my-1">
+              {/* <button
               key={brand.id}
               className={`w-full
          rounded-lg p-2 transition-all duration-200 
         ${index === brands.length - 1 ? "mx-auto" : ""}
       `}
             > */}
-            <img
-              src={brand.logo}
-              alt={brand.name}
-              className="w-full h-8 object-contain"
-            />
-            {/* </button> */}
-          </div>
-        ))}
-      </div>
+              <img
+                src={brand.logo}
+                alt={brand.name}
+                className="w-full h-8 object-contain"
+              />
+              {/* </button> */}
+            </div>
+          ))}
+        </div>
 
-      <button
-        variant="outline"
-        className="w-6/12 bg-black/60 border-white/30 text-white py-2 px-5 rounded hover:bg-white/30 transition-colors"
-      >
-        Tap for more options
-      </button>
+        <button
+          variant="outline"
+          className="w-6/12 bg-black/60 border-white/30 text-white py-2 px-5 rounded hover:bg-white/30 transition-colors"
+        >
+          Tap for more options
+        </button>
+        <img
+          src={ButterFluBottomLeft}
+          alt="butterefly-bottom-left"
+          className="absolute bottom-2 -left-18 size-20"
+        />
+      </div>
     </MainCard>
   );
 };
