@@ -4,7 +4,12 @@ import ECU from "assets/images/Eco-Logo-1.png";
 import ButterflyBottom from "assets/images/Butterfly-7.png";
 import ButterflyRight from "assets/images/Butterfly-2.png";
 
-const VARIANTS_WITHOUT_TOP_LOGO = ["offer", "brands", "dicountOffer"];
+const VARIANTS_WITHOUT_TOP_LOGO = [
+  "offer",
+  "brands",
+  "dicountOffer",
+  "spinner",
+];
 
 const MainCard = ({
   heading = "We'd like to say",
@@ -142,11 +147,14 @@ const MainCard = ({
         SPIN, WIN & SAVE
       </h1>
       <div
-        className="relative rounded-lg p-6 shadow-lg max-w-md mx-auto border-8 border-solid"
-        style={{
-          backgroundColor: "#FF8C00",
-          borderColor: "#F01414",
-        }}
+        className={`relative rounded-lg p-6  max-w-md mx-auto ${
+          variant !== "spinner" ? "border-8 border-solid shadow-lg" : ""
+        }`}
+        style={
+          variant !== "spinner"
+            ? { backgroundColor: "#FF8C00", borderColor: "#F01414" }
+            : {}
+        }
       >
         {!VARIANTS_WITHOUT_TOP_LOGO.includes(variant) && (
           <img
