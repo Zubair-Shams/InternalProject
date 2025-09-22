@@ -12,6 +12,8 @@ const MainCard = ({
   variant,
   children,
 }) => {
+  const NOT_TOP_LOGO = ["offer", "brands"];
+  const RENDER_ONLY_CHILD = ["brands", "register"];
   return (
     <div>
       <h1 className="text-4xl md:text-5xl font-bold text-red-600 mb-8 text-center">
@@ -24,7 +26,7 @@ const MainCard = ({
           borderColor: `#F01414`,
         }}
       >
-        {variant !== "offer" ? (
+        {!NOT_TOP_LOGO.includes(variant) ? (
           <img
             src={ButterflyLeft}
             alt="butterfly-left"
@@ -49,7 +51,7 @@ const MainCard = ({
         ) : (
           ""
         )}
-        {variant === "register" ? children : ""}
+        {RENDER_ONLY_CHILD.includes(variant) ? children : ""}
         {variant === "offer" ? (
           <>
             <p className="text-white text-xl font-medium text-center mb-2">

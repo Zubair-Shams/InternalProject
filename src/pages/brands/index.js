@@ -14,45 +14,38 @@ const Brands = () => {
     { id: "burberry", name: "BURBERRY", logo: burberryLogo },
     { id: "armani", name: "GIORGIO ARMANI", logo: armaniLogo },
     { id: "prada", name: "PRADA", logo: pradaLogo },
-    { id: "tesla", name: "Tesla", logo: Tesla },
     { id: "gucci", name: "GUCCI", logo: gucciLogo },
     { id: "eco", name: "ECO", logo: ecoLogo },
+    { id: "tesla", name: "Tesla", logo: Tesla },
     { id: "natura", name: "natura&co", logo: naturaLogo },
   ];
   return (
-    <MainCard variant={"register"}>
-      <div className="grid grid-cols-2 gap-3 mb-6">
-        {brands.map((brand) => (
-          <button
-            key={brand.id}
-            // onClick={() => toggleBrand(brand.id)}
-            className={`
-          relative bg-white rounded-lg p-4 transition-all duration-200 
-          hover:shadow-md hover:scale-105 active:scale-95
-
-        `}
-          >
+    <MainCard variant={"brands"}>
+      <div className="flex flex-wrap justify-start  mb-6">
+        {brands.map((brand, index) => (
+          <div className="w-6/12 my-1">
+            {/* <button
+              key={brand.id}
+              className={`w-full
+         rounded-lg p-2 transition-all duration-200 
+        ${index === brands.length - 1 ? "mx-auto" : ""}
+      `}
+            > */}
             <img
               src={brand.logo}
               alt={brand.name}
               className="w-full h-8 object-contain"
             />
-          </button>
+            {/* </button> */}
+          </div>
         ))}
       </div>
-      {/* Selection Counter */}
-      {/* <div className="mb-4">
-        <p className="text-spin-text-muted text-sm">
-          {selectedBrands.size}/3 brands selected
-        </p>
-      </div> */}
-      Action Button
+
       <button
         variant="outline"
-        className="w-full bg-white/20 border-white/30 text-spin-text hover:bg-white/30 transition-colors"
-        // disabled={selectedBrands.size === 0}
+        className="w-6/12 bg-black/60 border-white/30 text-white py-2 px-5 rounded hover:bg-white/30 transition-colors"
       >
-        {/* {selectedBrands.size === 3 ? "Start Spinning!" : "Go for more options"} */}
+        Tap for more options
       </button>
     </MainCard>
   );
