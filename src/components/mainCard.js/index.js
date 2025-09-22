@@ -128,6 +128,7 @@ const MainCard = ({
 
       case "brands":
       case "register":
+      case "spinner":
         return children;
 
       default:
