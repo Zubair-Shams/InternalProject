@@ -19,15 +19,15 @@ const data = [
   },
   {
     option: "ECO 20% OFF",
-    style: { backgroundColor: "#fff", textColor: "#000" },
+    style: { backgroundColor: "#F5F5F5", textColor: "#000" },
   },
   {
     option: "Prada 30% OFF",
-    style: { backgroundColor: "#ff9800", textColor: "black" },
+    style: { backgroundColor: "#FF8C00", textColor: "black" },
   },
   {
     option: "Burberry 35% OFF",
-    style: { backgroundColor: "#2196f3", textColor: "white" },
+    style: { backgroundColor: "#1E90FF", textColor: "white" },
   },
 ];
 
@@ -82,20 +82,15 @@ export default function SpinWheel() {
               "#fff",
             ]}
             textColors={["#000"]}
-            outerBorderColor="#000"
-            outerBorderWidth={4}
+            outerBorderWidth={12}
             innerBorderColor="#000"
-            radiusLineColor="#000"
+            radiusLineColor="#F01414"
+            outerBorderColor="#F01414"
             radiusLineWidth={2}
-            textDistance={60}
+            textDistance={55}
+            pointerProps={{ style: { display: "none" } }}
           />
           Pointer
-          <div
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-0 
-                        border-l-[15px] border-l-transparent 
-                        border-r-[15px] border-r-transparent 
-                        border-b-[25px] border-b-red-600 z-10"
-          ></div>
           {/* Centered Spin Button */}
           <button
             onClick={handleSpinClick}
