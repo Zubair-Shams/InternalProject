@@ -1,7 +1,13 @@
 import MainCard from "components/mainCard.js";
 import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
-
+import Burberry from "assets/images/Burberry-logo-1.png";
+import Tesla from "assets/images/Tesla-Logo-1.png";
+import Armani from "assets/images/Armani-Logo-1.png";
+import ECO from "assets/images/Eco-Logo-1.png";
+import Prada from "assets/images/Prada-Logo-1.png";
+import Gucci from "assets/images/Gucci-Logo-1.png";
+import Natura from "assets/images/Natura-Logo-1.png";
 const data = [
   {
     option: "Prada 15% OFF",
@@ -47,6 +53,20 @@ export default function SpinWheel() {
   return (
     <MainCard variant={"spinner"}>
       <div className="flex flex-col items-center">
+        <p className="text-2xl text-black/80 mb-3">
+          The Brands you are interested in today are:
+        </p>
+        <div className="flex w-full">
+          <div className="w-1/3">
+            <img src={Burberry} alt="brand-logo" className="h-16 w-34" />
+          </div>
+          <div className="w-1/3">
+            <img src={Gucci} alt="brand-logo" className="h-16 w-36" />
+          </div>
+          <div className="w-1/3">
+            <img src={Armani} alt="brand-logo" className="h-16 w-34" />
+          </div>
+        </div>
         <div className="relative">
           {/* Wheel */}
           <Wheel
