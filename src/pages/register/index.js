@@ -22,7 +22,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    navigate("/thankyou");
+    navigate("/brands");
   };
 
   return (

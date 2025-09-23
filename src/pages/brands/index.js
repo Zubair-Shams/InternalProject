@@ -9,16 +9,20 @@ import naturaLogo from "assets/images/Natura-Logo-1.png";
 import Tesla from "assets/images/Tesla-Logo-1.png";
 import MainCard from "components/mainCard.js";
 import ButterFluBottomLeft from "assets/images/Butterfly-3.png";
+import { useNavigate } from "react-router-dom";
+
+const brands = [
+  { id: "burberry", name: "BURBERRY", logo: burberryLogo },
+  { id: "armani", name: "GIORGIO ARMANI", logo: armaniLogo },
+  { id: "prada", name: "PRADA", logo: pradaLogo },
+  { id: "gucci", name: "GUCCI", logo: gucciLogo },
+  { id: "eco", name: "ECO", logo: ecoLogo },
+  { id: "tesla", name: "Tesla", logo: Tesla },
+  { id: "natura", name: "natura&co", logo: naturaLogo },
+];
+
 const Brands = () => {
-  const brands = [
-    { id: "burberry", name: "BURBERRY", logo: burberryLogo },
-    { id: "armani", name: "GIORGIO ARMANI", logo: armaniLogo },
-    { id: "prada", name: "PRADA", logo: pradaLogo },
-    { id: "gucci", name: "GUCCI", logo: gucciLogo },
-    { id: "eco", name: "ECO", logo: ecoLogo },
-    { id: "tesla", name: "Tesla", logo: Tesla },
-    { id: "natura", name: "natura&co", logo: naturaLogo },
-  ];
+  const Navigate = useNavigate();
   return (
     <MainCard variant={"brands"}>
       <div className="relative">
@@ -48,6 +52,7 @@ const Brands = () => {
         <button
           variant="outline"
           className="w-6/12 bg-black/60 border-white/30 text-white py-2 px-5 rounded hover:bg-white/30 transition-colors"
+          onClick={() => Navigate("/spinwheel")}
         >
           Tap for more options
         </button>

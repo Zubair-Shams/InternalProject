@@ -67,23 +67,21 @@ export default function SpinWheel() {
             innerBorderColor="#000"
             radiusLineColor="#000"
             radiusLineWidth={2}
-            textDistance={55}
+            textDistance={60}
           />
-
-          {/* Pointer */}
+          Pointer
           <div
             className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-0 
                         border-l-[15px] border-l-transparent 
                         border-r-[15px] border-r-transparent 
                         border-b-[25px] border-b-red-600 z-10"
           ></div>
-
           {/* Centered Spin Button */}
           <button
             onClick={handleSpinClick}
             disabled={mustSpin}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                     px-6 py-3 bg-black text-white rounded-full text-lg font-bold 
+                     px-3 py-3 bg-black text-white rounded-full text-lg font-bold 
                      hover:scale-105 transition-transform z-20
                      disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
@@ -100,7 +98,7 @@ export default function SpinWheel() {
             <p className="text-lg text-gray-700 mb-2">You won:</p>
             <p className="text-xl font-bold text-green-600">{winner}</p>
             <button
-              onClick={() => setWinner(null)}
+              onClick={() => handleSpinClick()}
               className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
             >
               Spin Again
