@@ -1,5 +1,5 @@
 import React from "react";
-
+import BottomLogo from "assets/images/Spin Stable Logo Final Artwork BLK and WTE/SPIN STABLE LOGO Outlined BLK_FINAL-01.png";
 // Layout Component with background
 const GameLayout = ({ children }) => {
   return (
@@ -22,7 +22,7 @@ const GameLayout = ({ children }) => {
       {/* Bottom Right Corner - Spin Stable Logo */}
       <div className="absolute bottom-4 right-4 z-20">
         <img
-          src="/assets/images/Spin Stable Logo Final Artwork BLK and WTE/SPIN STABLE LOGO Outlined BLK_FINAL-01.jpg"
+          src={BottomLogo}
           alt="Spin Stable Logo"
           className="w-16 h-16 object-contain"
         />
