@@ -84,7 +84,7 @@ export default function SpinWheel() {
             textColors={["#000"]}
             outerBorderWidth={12}
             innerBorderColor="#000"
-            radiusLineColor="#F01414"
+            radiusLineColor={["tranparent"]}
             outerBorderColor="#F01414"
             radiusLineWidth={2}
             textDistance={55}
