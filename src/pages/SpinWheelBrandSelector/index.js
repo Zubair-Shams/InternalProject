@@ -8,6 +8,8 @@ import ECO from "assets/images/Eco-Logo-1.png";
 import Prada from "assets/images/Prada-Logo-1.png";
 import Gucci from "assets/images/Gucci-Logo-1.png";
 import Natura from "assets/images/Natura-Logo-1.png";
+import YouWinModal from "components/modal";
+import WinMessage from "components/winMessage";
 const data = [
   {
     option: "Prada 15% OFF",
@@ -32,45 +34,70 @@ const data = [
 ];
 
 export default function SpinWheel() {
-  const [mustSpin, setMustSpin] = useState(false);
+  const [isSpinnig, setIsSpinnig] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
-  const [winner, setWinner] = useState(null);
-
+  const [winner, setWinner] = useState("Burberry 35% OFF");
+  const [postWin, setpostWin] = useState(true);
   const handleSpinClick = () => {
-    if (!mustSpin) {
+    if (!isSpinnig) {
       const newPrizeNumber = Math.floor(Math.random() * data.length);
       setPrizeNumber(newPrizeNumber);
-      setMustSpin(true);
+      setIsSpinnig(true);
       setWinner(null); // Clear previous winner
     }
   };
 
   const handleStopSpinning = () => {
-    setMustSpin(false);
+    setpostWin(true);
+    setIsSpinnig(false);
     setWinner(data[prizeNumber].option);
   };
-
+  const getWinnerBrand = () => {
+    if (!!winner) {
+      const spaceIndex = winner.indexOf(" ");
+      const brandName = winner.substring(0, spaceIndex);
+      return brandName;
+    } else return "";
+  };
+  const getWinnerDiscount = () => {
+    if (!!winner) {
+      const spaceIndex = winner.indexOf(" ");
+      const Discount = winner.substring(spaceIndex, winner.length + 1);
+      return Discount;
+    } else return "";
+  };
+  console.log(winner, " == winnner data");
   return (
     <MainCard variant={"spinner"}>
       <div className="flex flex-col items-center">
-        <p className="text-2xl text-black/80 mb-3">
-          The Brands you are interested in today are:
-        </p>
-        <div className="flex w-full">
-          <div className="w-1/3">
-            <img src={Burberry} alt="brand-logo" className="h-16 w-34" />
+        {postWin ? (
+          <h2 className="text-3xl text-black font-bold mb-8 text-center">
+            YOU WON A{" "}
+            <span className="text-red-600">{getWinnerDiscount()}</span> DISCOUNT
+            FROM {getWinnerBrand()}
+          </h2>
+        ) : (
+          <p className="text-2xl text-black/80 mb-3">
+            The Brands you are interested in today are:
+          </p>
+        )}
+        {!postWin && (
+          <div className="flex w-full">
+            <div className="w-1/3">
+              <img src={Burberry} alt="brand-logo" className="h-16 w-34" />
+            </div>
+            <div className="w-1/3">
+              <img src={Gucci} alt="brand-logo" className="h-16 w-36" />
+            </div>
+            <div className="w-1/3">
+              <img src={Armani} alt="brand-logo" className="h-16 w-34" />
+            </div>
           </div>
-          <div className="w-1/3">
-            <img src={Gucci} alt="brand-logo" className="h-16 w-36" />
-          </div>
-          <div className="w-1/3">
-            <img src={Armani} alt="brand-logo" className="h-16 w-34" />
-          </div>
-        </div>
+        )}
         <div className="relative">
           {/* Wheel */}
           <Wheel
-            mustStartSpinning={mustSpin}
+            mustStartSpinning={isSpinnig}
             prizeNumber={prizeNumber}
             data={data}
             onStopSpinning={handleStopSpinning}
@@ -94,14 +121,17 @@ export default function SpinWheel() {
           {/* Centered Spin Button */}
           <button
             onClick={handleSpinClick}
-            disabled={mustSpin}
+            disabled={isSpinnig}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
                      px-3 py-3 bg-black text-white rounded-full text-lg font-bold 
                      hover:scale-105 transition-transform z-20
                      disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
-            {mustSpin ? "SPINNING..." : "SPIN"}
+            {"SPIN"}
           </button>
+          <div className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+            <WinMessage />
+          </div>
         </div>
 
         {/* Winner Display */}
@@ -120,6 +150,11 @@ export default function SpinWheel() {
             </button>
           </div>
         )}
+        {/* <YouWinModal
+          isVisible={true}
+          discount={getWinnerDiscount()}
+          brand={getWinnerBrand() || "pepsi"}
+        /> */}
       </div>
     </MainCard>
   );
