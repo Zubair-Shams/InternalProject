@@ -36,8 +36,8 @@ const data = [
 export default function SpinWheel() {
   const [isSpinnig, setIsSpinnig] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
-  const [winner, setWinner] = useState("Burberry 35% OFF");
-  const [postWin, setpostWin] = useState(true);
+  const [winner, setWinner] = useState("");
+  const [postWin, setpostWin] = useState(false);
   const handleSpinClick = () => {
     if (!isSpinnig) {
       const newPrizeNumber = Math.floor(Math.random() * data.length);
@@ -129,27 +129,13 @@ export default function SpinWheel() {
           >
             {"SPIN"}
           </button>
-          <div className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
-            <WinMessage />
-          </div>
+          {postWin && (
+            <div className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+              <WinMessage />
+            </div>
+          )}
         </div>
 
-        {/* Winner Display */}
-        {winner && (
-          <div className="mt-6 p-6 bg-green-100 border-2 border-green-300 rounded-lg text-center">
-            <h2 className="text-2xl font-bold text-green-800 mb-2">
-              🎉 Congratulations! 🎉
-            </h2>
-            <p className="text-lg text-gray-700 mb-2">You won:</p>
-            <p className="text-xl font-bold text-green-600">{winner}</p>
-            <button
-              onClick={() => handleSpinClick()}
-              className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-            >
-              Spin Again
-            </button>
-          </div>
-        )}
         {/* <YouWinModal
           isVisible={true}
           discount={getWinnerDiscount()}
