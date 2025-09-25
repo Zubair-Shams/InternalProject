@@ -143,12 +143,12 @@ const MainCard = ({
 
   return (
     <div className="w-full">
-      <h1 className="text-4xl md:text-5xl font-bold text-red-600 mb-4 text-center">
+      <h1 className="text-7xl md:text-7xl font-bold text-red-600 mb-8 text-center ">
         SPIN, WIN & SAVE
       </h1>
       <div
-        className={`relative rounded-lg p-6  max-w-md mx-auto ${
-          variant !== "spinner" ? "border-8 border-solid shadow-lg" : ""
+        className={`relative rounded-lg p-6  w-[45vw] h-[50vh] overflow-auto mx-auto ${
+          variant !== "spinner" ? "border-[14px] border-solid shadow-lg" : ""
         }`}
         style={
           variant !== "spinner"

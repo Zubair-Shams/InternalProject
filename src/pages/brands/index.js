@@ -26,12 +26,12 @@ const Brands = () => {
   return (
     <MainCard variant={"brands"}>
       <div className="relative">
-        <div className="text-center text-white/80 text-lg">
+        <div className="text-center text-white/80 text-4xl">
           <p>Top 3 brands that interest you today:</p>
         </div>
         <div className="flex flex-wrap justify-start  mb-6">
           {brands.map((brand, index) => (
-            <div className="w-6/12 my-1">
+            <div className="w-6/12 my-3">
               {/* <button
               key={brand.id}
               className={`w-full
@@ -42,7 +42,7 @@ const Brands = () => {
               <img
                 src={brand.logo}
                 alt={brand.name}
-                className="w-full h-8 object-contain"
+                className="w-full h-14 object-contain"
               />
               {/* </button> */}
             </div>
