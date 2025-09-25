@@ -5,25 +5,7 @@ module.exports = {
     extend: {
       colors: {
         // Custom color variables
-        orange: "var(--orange)",
-        lightOrange: "var(--lightOrange)",
-        dark: "var(--dark)",
-        lightDark: "var(--lightDark)",
-        gray: "var(--gray)",
-        lightGray: "var(--lightGray)",
-        extraLightGray: "var(--extraLightGray)",
-        darkGray: "var(--darkGray)",
-        grayMedium: "var(--grayMedium)",
-        lightSkyBlue: "var(--lightSkyBlue)",
-        brightSkyBlue: "var(--brightSkyBlue)",
-        tealBlue: "var(--tealBlue)",
-        oliveGreen: "var(--oliveGreen)",
-        lightOliveGreen: "var(--lightOliveGreen)",
-        extralightOrange: "var(--extralightOrange)",
-        verylightOrange: "var(--verylightOrange)",
-        majesticPurple: "var(--majesticPurple)",
-        danger: "var(--danger)",
-        // Additional theme colors
+        dark: "#4A4A4A",
         primary: "var(--primary, #3b82f6)",
         secondary: "var(--secondary, #64748b)",
         accent: "var(--accent, #f59e0b)",

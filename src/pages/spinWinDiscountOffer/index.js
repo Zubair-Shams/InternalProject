@@ -6,8 +6,7 @@ const WinDiscountOffer = () => {
   return (
     <MainCard
       variant={"dicountOffer"}
-      heading="Glad you love today's offer of "
-      subHeading="Glad you love today's offer of"
+      subHeading="Glad you love today's offer of:"
       description="To enjoy this offer, sign up now."
       offerLabel="20% OFF"
       brandLogo={burberryLogo}

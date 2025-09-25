@@ -3,6 +3,7 @@ import ButterflyLeft from "assets/images/Butterfly-1.png";
 import ECU from "assets/images/Eco-Logo-1.png";
 import ButterflyBottom from "assets/images/Butterfly-7.png";
 import ButterflyRight from "assets/images/Butterfly-2.png";
+import { useNavigate } from "react-router-dom";
 
 const VARIANTS_WITHOUT_TOP_LOGO = [
   "offer",
@@ -22,6 +23,7 @@ const MainCard = ({
   brandLogo,
   children,
 }) => {
+  const Navigate = useNavigate();
   // Pre-calculate split description for "offer" case
   const offerSplitIndex = description.indexOf("offer?") + "offer?".length;
   const descriptionPart1 =
@@ -36,15 +38,17 @@ const MainCard = ({
       case "thankyou":
         return (
           <>
-            <p className="text-white text-lg font-medium text-center mb-4">
+            <p className="text-white text-5xl font-medium text-center mb-4">
               {heading}
             </p>
-            <h2 className="text-black text-4xl md:text-6xl font-bold text-center mb-4">
+            <h2 className="text-black text-6xl md:text-8xl font-bold text-center mb-4">
               {subHeading}
             </h2>
-            <p className="text-white text-lg font-medium text-center">
-              {description}
-            </p>
+            <div className="text-center w-full ">
+              <p className="text-white text-5xl font-medium  w-[37rem] mx-auto">
+                {description}
+              </p>
+            </div>
           </>
         );
 
@@ -75,7 +79,7 @@ const MainCard = ({
                 {buttons.map((button, idx) => (
                   <button
                     key={idx}
-                    className="w-60 text-white px-6 py-3 mx-3 rounded-xl"
+                    className="bg-dark mt-4 w-auto h-14 text-white px-12 py-2 rounded-xl text-xl mx-4"
                     onClick={button.onClick}
                     style={{ backgroundColor: "#484444" }}
                   >
@@ -100,27 +104,27 @@ const MainCard = ({
       case "dicountOffer":
         return (
           <>
-            <p className="text-white text-xl font-medium text-center mb-2">
+            <p className="text-white text-4xl font-medium text-center mb-2">
               {subHeading}
             </p>
             <img
               src={brandLogo || ECU}
               alt="eco-logo"
-              className="size-20 w-44 block mx-auto"
+              className="size-20 w-80 block mx-auto"
             />
-            <p className="text-black text-4xl font-extrabold text-center">
+            <p className="text-black text-8xl font-extrabold text-center">
               {offerLabel}
             </p>
-            <p className="text-white text-xl font-medium text-center my-2">
+            <p className="text-white text-4xl font-medium text-center my-2">
               {description}
             </p>
 
             <div className="flex m-auto mt-2 mb-6 justify-center">
               <button
-                className="bg-black text-white px-4 py-2 rounded"
-                onClick={() => {}}
+                className="bg-dark mt-4 w-auto h-14 text-white px-12 py-2 rounded-xl text-xl"
+                onClick={() => Navigate("/thankyou")}
               >
-                {"Tap to accept this offer"}
+                {"Tap to recieve  this offer"}
               </button>
             </div>
             {/* Decorative Images */}
