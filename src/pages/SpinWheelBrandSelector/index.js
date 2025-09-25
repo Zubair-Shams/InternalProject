@@ -1,6 +1,7 @@
 import MainCard from "components/mainCard.js";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Wheel } from "react-custom-roulette";
+import { useNavigate } from "react-router-dom"; // ✅ add this
 import Burberry from "assets/images/Burberry-logo-1.png";
 import Tesla from "assets/images/Tesla-Logo-1.png";
 import Armani from "assets/images/Armani-Logo-1.png";
@@ -8,8 +9,8 @@ import ECO from "assets/images/Eco-Logo-1.png";
 import Prada from "assets/images/Prada-Logo-1.png";
 import Gucci from "assets/images/Gucci-Logo-1.png";
 import Natura from "assets/images/Natura-Logo-1.png";
-import YouWinModal from "components/modal";
 import WinMessage from "components/winMessage";
+
 const data = [
   {
     option: "Prada 15% OFF",
@@ -38,6 +39,9 @@ export default function SpinWheel() {
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [winner, setWinner] = useState("");
   const [postWin, setpostWin] = useState(false);
+
+  const navigate = useNavigate(); // ✅ initialize router navigation
+
   const handleSpinClick = () => {
     if (!isSpinnig) {
       const newPrizeNumber = Math.floor(Math.random() * data.length);
@@ -52,19 +56,21 @@ export default function SpinWheel() {
     setIsSpinnig(false);
     setWinner(data[prizeNumber].option);
   };
+
   const getWinnerBrand = () => {
     if (!!winner) {
       const spaceIndex = winner.indexOf(" ");
-      const brandName = winner.substring(0, spaceIndex);
-      return brandName;
-    } else return "";
+      return winner.substring(0, spaceIndex);
+    }
+    return "";
   };
+
   const getWinnerDiscount = () => {
     if (!!winner) {
       const spaceIndex = winner.indexOf(" ");
-      const Discount = winner.substring(spaceIndex, winner.length + 1);
-      return Discount;
-    } else return "";
+      return winner.substring(spaceIndex, winner.length + 1);
+    }
+    return "";
   };
 
   const imsList = [
@@ -72,7 +78,18 @@ export default function SpinWheel() {
     { src: Burberry, className: "h-16 w-36" },
     { src: Prada, className: "h-16 w-34" },
   ];
-  console.log(winner, " == winnner data");
+
+  // ✅ Redirect after win
+  useEffect(() => {
+    if (postWin) {
+      const timer = setTimeout(() => {
+        navigate("/offer");
+      }, 3000); // 3 sec delay
+
+      return () => clearTimeout(timer); // cleanup
+    }
+  }, [postWin, navigate]);
+
   return (
     <MainCard variant={"spinner"}>
       <div className="flex flex-col items-center">
@@ -87,6 +104,7 @@ export default function SpinWheel() {
             The Brands you are interested in today are:
           </p>
         )}
+
         <div className="flex ">
           {!postWin &&
             imsList.map((item, index) => (
@@ -99,8 +117,8 @@ export default function SpinWheel() {
               </div>
             ))}
         </div>
+
         <div className="relative">
-          {/* Wheel */}
           <Wheel
             mustStartSpinning={isSpinnig}
             prizeNumber={prizeNumber}
@@ -122,6 +140,7 @@ export default function SpinWheel() {
             textDistance={55}
             pointerProps={{ style: { display: "none" } }}
           />
+
           <button
             onClick={handleSpinClick}
             disabled={isSpinnig}
@@ -133,18 +152,13 @@ export default function SpinWheel() {
           >
             {"SPIN"}
           </button>
+
           {postWin && (
             <div className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
               <WinMessage />
             </div>
           )}
         </div>
-
-        {/* <YouWinModal
-          isVisible={true}
-          discount={getWinnerDiscount()}
-          brand={getWinnerBrand() || "pepsi"}
-        /> */}
       </div>
     </MainCard>
   );
