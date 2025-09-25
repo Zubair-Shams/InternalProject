@@ -142,8 +142,8 @@ const MainCard = ({
   };
 
   return (
-    <div>
-      <h1 className="text-4xl md:text-5xl font-bold text-red-600 mb-8 text-center">
+    <div className="w-full">
+      <h1 className="text-4xl md:text-5xl font-bold text-red-600 mb-4 text-center">
         SPIN, WIN & SAVE
       </h1>
       <div
