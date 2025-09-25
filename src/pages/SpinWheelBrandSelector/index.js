@@ -66,6 +66,12 @@ export default function SpinWheel() {
       return Discount;
     } else return "";
   };
+
+  const imsList = [
+    { src: ECO, className: "h-16 w-34 mx-2" },
+    { src: Burberry, className: "h-16 w-36" },
+    { src: Prada, className: "h-16 w-34" },
+  ];
   console.log(winner, " == winnner data");
   return (
     <MainCard variant={"spinner"}>
@@ -81,19 +87,18 @@ export default function SpinWheel() {
             The Brands you are interested in today are:
           </p>
         )}
-        {!postWin && (
-          <div className="flex w-full">
-            <div className="w-1/3">
-              <img src={Burberry} alt="brand-logo" className="h-16 w-34" />
-            </div>
-            <div className="w-1/3">
-              <img src={Gucci} alt="brand-logo" className="h-16 w-36" />
-            </div>
-            <div className="w-1/3">
-              <img src={Armani} alt="brand-logo" className="h-16 w-34" />
-            </div>
-          </div>
-        )}
+        <div className="flex ">
+          {!postWin &&
+            imsList.map((item, index) => (
+              <div key={index} className="w-1/3 flex justify-center">
+                <img
+                  src={item.src}
+                  alt={`brand-logo-${index}`}
+                  className={item.className}
+                />
+              </div>
+            ))}
+        </div>
         <div className="relative">
           {/* Wheel */}
           <Wheel
@@ -117,7 +122,7 @@ export default function SpinWheel() {
             textDistance={55}
             pointerProps={{ style: { display: "none" } }}
           />
-          Pointer
+          {/* Pointer */}
           {/* Centered Spin Button */}
           <button
             onClick={handleSpinClick}
