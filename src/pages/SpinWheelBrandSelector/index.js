@@ -147,8 +147,7 @@ export default function SpinWheel() {
             style={{ backgroundColor: "#353333" }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
                      size-20  bg-black text-white rounded-full text-2xl font-bold 
-                     hover:scale-105 transition-transform z-20
-                     disabled:opacity-70 disabled:cursor-not-allowed"
+                     hover:scale-105 transition-transform z-20 disabled:cursor-not-allowed"
           >
             {"SPIN"}
           </button>
