@@ -152,7 +152,7 @@ const MainCard = ({
         SPIN, WIN & SAVE
       </h1>
       <div
-        className={`relative rounded-lg p-6  min-w-[45vw] max-w-[60vw] min-h-[50vh] max-h-[70vh] overflow-auto mx-auto no-scrollbar ${
+        className={`relative rounded-lg p-6  min-w-[45vw] max-w-[50vw] min-h-[50vh] max-h-[70vh] mx-auto no-scrollbar ${
           variant !== "spinner" ? "border-[14px] border-solid shadow-lg" : ""
         }`}
         style={
