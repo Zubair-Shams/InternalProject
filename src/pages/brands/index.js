@@ -68,7 +68,7 @@ const Brands = () => {
 
         <button
           variant="outline"
-          className="w-44 h-12 bg-black/60 border-white/30 text-white py-2 px-5 rounded transition-colors"
+          className="bg-dark mt-4 w-auto h-14 text-white px-12 py-2 rounded-xl text-xl"
           onClick={() => Navigate("/spinwheel")}
         >
           Tap for more options
