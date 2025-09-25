@@ -1,146 +1,129 @@
 import MainCard from "components/mainCard.js";
 import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
-import Burberry from "assets/images/Burberry-logo-1.png";
-import Tesla from "assets/images/Tesla-Logo-1.png";
-import Armani from "assets/images/Armani-Logo-1.png";
+
+// === Logos shown above the wheel (target design wants ECO, BURBERRY, PRADA) ===
 import ECO from "assets/images/Eco-Logo-1.png";
+import Burberry from "assets/images/Burberry-logo-1.png";
 import Prada from "assets/images/Prada-Logo-1.png";
-import Gucci from "assets/images/Gucci-Logo-1.png";
-import Natura from "assets/images/Natura-Logo-1.png";
-import YouWinModal from "components/modal";
-import WinMessage from "components/winMessage";
-const data = [
-  {
-    option: "Prada 15% OFF",
-    style: { backgroundColor: "#f44336", textColor: "white" },
-  },
-  {
-    option: "Burberry 25% OFF",
-    style: { backgroundColor: "#03a9f4", textColor: "white" },
-  },
-  {
-    option: "ECO 20% OFF",
-    style: { backgroundColor: "#F5F5F5", textColor: "#000" },
-  },
-  {
-    option: "Prada 30% OFF",
-    style: { backgroundColor: "#FF8C00", textColor: "black" },
-  },
-  {
-    option: "Burberry 35% OFF",
-    style: { backgroundColor: "#1E90FF", textColor: "white" },
-  },
+
+// Optional: keep others around if you’ll switch brands later
+// import Tesla from "assets/images/Tesla-Logo-1.png";
+// import Armani from "assets/images/Armani-Logo-1.png";
+// import Gucci from "assets/images/Gucci-Logo-1.png";
+// import Natura from "assets/images/Natura-Logo-1.png";
+
+const slices = [
+  { option: "PRADA 15% OFF", style: { backgroundColor: "#FF8C2A", textColor: "#000" } },
+  { option: "BURBERRY 25% OFF", style: { backgroundColor: "#39B4D3", textColor: "#000" } },
+  { option: "ECO 20% OFF", style: { backgroundColor: "#FFFFFF", textColor: "#000" } },
+  { option: "PRADA 30% OFF", style: { backgroundColor: "#FF8C2A", textColor: "#000" } },
+  { option: "BURBERRY 35% OFF", style: { backgroundColor: "#39B4D3", textColor: "#000" } },
 ];
 
 export default function SpinWheel() {
-  const [isSpinnig, setIsSpinnig] = useState(false);
+  const [isSpinning, setIsSpinning] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [winner, setWinner] = useState("");
-  const [postWin, setpostWin] = useState(false);
+  const [postWin, setPostWin] = useState(false);
+
   const handleSpinClick = () => {
-    if (!isSpinnig) {
-      const newPrizeNumber = Math.floor(Math.random() * data.length);
-      setPrizeNumber(newPrizeNumber);
-      setIsSpinnig(true);
-      setWinner(null); // Clear previous winner
-    }
+    if (isSpinning) return;
+    // choose a random slice
+    const idx = Math.floor(Math.random() * slices.length);
+    setPrizeNumber(idx);
+    setIsSpinning(true);
+    setPostWin(false);
+    setWinner("");
   };
 
   const handleStopSpinning = () => {
-    setpostWin(true);
-    setIsSpinnig(false);
-    setWinner(data[prizeNumber].option);
+    setIsSpinning(false);
+    setPostWin(true);
+    setWinner(slices[prizeNumber].option);
   };
-  const getWinnerBrand = () => {
-    if (!!winner) {
-      const spaceIndex = winner.indexOf(" ");
-      const brandName = winner.substring(0, spaceIndex);
-      return brandName;
-    } else return "";
-  };
-  const getWinnerDiscount = () => {
-    if (!!winner) {
-      const spaceIndex = winner.indexOf(" ");
-      const Discount = winner.substring(spaceIndex, winner.length + 1);
-      return Discount;
-    } else return "";
-  };
-  console.log(winner, " == winnner data");
+
+  // --- Helpers (fixed spacing/trim bugs) ---
+  const getWinnerBrand = () => (winner ? winner.split(" ")[0] : "");
+  const getWinnerDiscount = () =>
+    winner ? winner.substring(winner.indexOf(" ") + 1).trim() : "";
+
   return (
-    <MainCard variant={"spinner"}>
+    <MainCard variant="spinner">
       <div className="flex flex-col items-center">
+
+        {/* Header / Subheader */}
         {postWin ? (
-          <h2 className="text-3xl text-black font-bold mb-8 text-center">
-            YOU WON A{" "}
-            <span className="text-red-600">{getWinnerDiscount()}</span> DISCOUNT
-            FROM {getWinnerBrand()}
+          <h2 className="text-3xl md:text-4xl text-black font-extrabold mb-8 text-center tracking-tight">
+            You won <span className="text-red-600">{getWinnerDiscount()}</span> from{" "}
+            <span className="uppercase">{getWinnerBrand()}</span>
           </h2>
         ) : (
-          <p className="text-2xl text-black/80 mb-3">
-            The Brands you are interested in today are:
-          </p>
+          <>
+            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-red-600 mb-2">
+              SPIN,WIN&SAVE
+            </h1>
+            <p className="text-2xl text-black/80 mb-6">
+              The brands you are interested in today are:
+            </p>
+            <div className="flex items-center justify-center gap-10 mb-6">
+              <img src={ECO} alt="ECO" className="h-12 md:h-14 object-contain" />
+              <img src={Burberry} alt="BURBERRY" className="h-10 md:h-12 object-contain" />
+              <img src={Prada} alt="PRADA" className="h-10 md:h-12 object-contain" />
+            </div>
+          </>
         )}
-        {!postWin && (
-          <div className="flex w-full">
-            <div className="w-1/3">
-              <img src={Burberry} alt="brand-logo" className="h-16 w-34" />
-            </div>
-            <div className="w-1/3">
-              <img src={Gucci} alt="brand-logo" className="h-16 w-36" />
-            </div>
-            <div className="w-1/3">
-              <img src={Armani} alt="brand-logo" className="h-16 w-34" />
-            </div>
-          </div>
-        )}
+
         <div className="relative">
+          {/* Top pointer (matches design). This sits above the wheel center. */}
+          <div
+            className="absolute -top-4 left-1/2 -translate-x-1/2 z-20"
+            aria-hidden
+            style={{
+              width: 0,
+              height: 0,
+              borderLeft: "18px solid transparent",
+              borderRight: "18px solid transparent",
+              borderBottom: "28px solid #D72E2E", // red pointer
+            }}
+          />
+
           {/* Wheel */}
           <Wheel
-            mustStartSpinning={isSpinnig}
+            mustStartSpinning={isSpinning}
             prizeNumber={prizeNumber}
-            data={data}
+            data={slices}
             onStopSpinning={handleStopSpinning}
-            backgroundColors={[
-              "#ff9800",
-              "#2196f3",
-              "#f44336",
-              "#03a9f4",
-              "#fff",
-            ]}
-            textColors={["#000"]}
-            outerBorderWidth={12}
-            innerBorderColor="#000"
-            radiusLineColor={["tranparent"]}
-            outerBorderColor="#F01414"
+            // visual tuning to match the target look
+            outerBorderWidth={18}
+            outerBorderColor="#D72E2E"      // thicker red rim
+            innerBorderColor="#000000"
+            radiusLineColor={"#ffffff"}
             radiusLineWidth={2}
-            textDistance={55}
+            textDistance={65}
+            fontSize={16}
+            spinDuration={0.75}             // snappy like the mock (seconds)
+            // hide library pointer; we’re drawing our own
             pointerProps={{ style: { display: "none" } }}
+            // NOTE: you already set per-slice colors in 'data'. No need for backgroundColors here.
           />
-          Pointer
-          {/* Centered Spin Button */}
-          <button
-            onClick={handleSpinClick}
-            disabled={isSpinnig}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                     px-3 py-3 bg-black text-white rounded-full text-lg font-bold 
-                     hover:scale-105 transition-transform z-20
-                     disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
-          >
-            {"SPIN"}
-          </button>
-          {postWin && (
-            <div className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
-              <WinMessage />
-            </div>
+
+          {/* Center Spin Button */}
+          {!postWin && (
+            <button
+              onClick={handleSpinClick}
+              disabled={isSpinning}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                         h-24 w-24 md:h-28 md:w-28 rounded-full bg-black text-white
+                         text-2xl font-extrabold tracking-wide z-30
+                         hover:scale-105 transition-transform
+                         disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+              aria-label="Spin"
+            >
+              SPIN
+            </button>
           )}
         </div>
-
-        {/* <YouWinModal
-          isVisible={true}
-          discount={getWinnerDiscount()}
-          brand={getWinnerBrand() || "pepsi"}
-        /> */}
       </div>
     </MainCard>
   );
