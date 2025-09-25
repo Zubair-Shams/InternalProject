@@ -12,13 +12,25 @@ import ButterFluBottomLeft from "assets/images/Butterfly-3.png";
 import { useNavigate } from "react-router-dom";
 
 const brands = [
-  { id: "burberry", name: "BURBERRY", logo: burberryLogo },
-  { id: "armani", name: "GIORGIO ARMANI", logo: armaniLogo },
-  { id: "prada", name: "PRADA", logo: pradaLogo },
-  { id: "gucci", name: "GUCCI", logo: gucciLogo },
-  { id: "eco", name: "ECO", logo: ecoLogo },
-  { id: "tesla", name: "Tesla", logo: Tesla },
-  { id: "natura", name: "natura&co", logo: naturaLogo },
+  {
+    name: "Burberry",
+    logo: burberryLogo,
+    className: "w-full h-14 object-contain",
+  },
+  {
+    name: "Giorgio Armani",
+    logo: armaniLogo,
+    className: "w-full h-14 object-contain",
+  },
+  { name: "Prada", logo: pradaLogo, className: "w-full h-18 object-contain" },
+  { name: "Gucci", logo: gucciLogo, className: "w-full h-18 object-contain" },
+  { name: "ECO", logo: ecoLogo, className: "w-full h-14 object-contain" },
+  { name: "Tesla", logo: Tesla, className: "w-full h-14 object-contain" },
+  {
+    name: "Natura & Co",
+    logo: naturaLogo,
+    className: "w-[60%] h-20 object-contain mx-auto",
+  }, // ✅ centered & smaller
 ];
 
 const Brands = () => {
@@ -29,9 +41,14 @@ const Brands = () => {
         <div className="text-center text-white/80 text-4xl">
           <p>Top 3 brands that interest you today:</p>
         </div>
-        <div className="flex flex-wrap justify-start  mb-6">
+        <div className="flex flex-wrap justify-start mb-6">
           {brands.map((brand, index) => (
-            <div className="w-6/12 my-3">
+            <div
+              key={index}
+              className={`w-6/12 my-3 ${
+                index === brands.length - 1 ? "flex justify-center w-full" : ""
+              }`}
+            >
               {/* <button
               key={brand.id}
               className={`w-full
@@ -42,7 +59,7 @@ const Brands = () => {
               <img
                 src={brand.logo}
                 alt={brand.name}
-                className="w-full h-14 object-contain"
+                className={brand.className}
               />
               {/* </button> */}
             </div>
@@ -51,7 +68,7 @@ const Brands = () => {
 
         <button
           variant="outline"
-          className="w-6/12 bg-black/60 border-white/30 text-white py-2 px-5 rounded hover:bg-white/30 transition-colors"
+          className="w-44 h-12 bg-black/60 border-white/30 text-white py-2 px-5 rounded transition-colors"
           onClick={() => Navigate("/spinwheel")}
         >
           Tap for more options
