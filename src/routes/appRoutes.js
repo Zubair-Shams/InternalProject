@@ -12,7 +12,7 @@ const WinDiscountOffer = lazy(() => import("pages/spinWinDiscountOffer"));
 const SpinWheel = lazy(() => import("pages/SpinWheelBrandSelector"));
 
 const appRoutes = [
-  { path: "/", element: <Home /> },
+  { path: "/", element: <Brands /> },
   { path: "/about", element: <About /> },
   { path: "/register", element: <Register /> },
   { path: "/thankyou", element: <ThankYou /> },
