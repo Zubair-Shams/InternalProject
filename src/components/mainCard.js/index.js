@@ -51,32 +51,33 @@ const MainCard = ({
       case "offer":
         return (
           <>
-            <p className="text-white text-xl font-medium text-center mb-2">
+            <p className="text-white/90 text-4xl font-medium text-center mb-2">
               {subHeading}
             </p>
             <img
               src={brandLogo || ECU}
               alt="eco-logo"
-              className="size-20 w-44 block mx-auto"
+              className="size-20 w-72 block mx-auto"
             />
-            <p className="text-black text-4xl font-extrabold text-center">
+            <p className="text-black text-8xl mb-2 font-extrabold text-center">
               {offerLabel}
             </p>
-            <p className="text-white text-xl font-medium text-center">
+            <p className="text-white/90 text-4xl font-medium text-center">
               {descriptionPart1}
             </p>
             {descriptionPart2 && (
-              <p className="text-white text-xl font-medium text-center">
+              <p className="text-white/90 text-4xl font-medium text-center">
                 {descriptionPart2}
               </p>
             )}
             {buttons.length > 0 && (
-              <div className="flex mt-2 mb-6 justify-between">
+              <div className="flex my-5 w-full mb-6  justify-center">
                 {buttons.map((button, idx) => (
                   <button
                     key={idx}
-                    className="bg-black text-white px-4 py-2 rounded"
+                    className="w-60 text-white px-6 py-3 mx-3 rounded-xl"
                     onClick={button.onClick}
+                    style={{ backgroundColor: "#484444" }}
                   >
                     {button.title}
                   </button>
@@ -147,7 +148,7 @@ const MainCard = ({
         SPIN, WIN & SAVE
       </h1>
       <div
-        className={`relative rounded-lg p-6  min-w-[45vw] max-w-[60vw] min-h-[50vh] max-h-[70vh] overflow-auto mx-auto ${
+        className={`relative rounded-lg p-6  min-w-[45vw] max-w-[60vw] min-h-[50vh] max-h-[70vh] overflow-auto mx-auto no-scrollbar ${
           variant !== "spinner" ? "border-[14px] border-solid shadow-lg" : ""
         }`}
         style={

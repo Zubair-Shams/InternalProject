@@ -120,6 +120,7 @@ export default function SpinWheel() {
 
         <div className="relative">
           <Wheel
+          
             mustStartSpinning={isSpinnig}
             prizeNumber={prizeNumber}
             data={data}
@@ -138,6 +139,8 @@ export default function SpinWheel() {
             outerBorderColor="#F01414"
             radiusLineWidth={2}
             textDistance={55}
+            width={"800px"} // ⬅️ wheel diameter
+            height={400}
             pointerProps={{ style: { display: "none" } }}
           />
 

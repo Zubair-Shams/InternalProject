@@ -7,6 +7,15 @@
   
   font-family: "Oswald", sans-serif;
 }
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
 :root {
   /* Extended color palette */
   --orange: #f97316;
