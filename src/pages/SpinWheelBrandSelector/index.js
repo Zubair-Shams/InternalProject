@@ -127,8 +127,12 @@ export default function SpinWheel() {
               </div>
             ))}
         </div>
-
-        <div className="relative rotate-[315deg]">
+        {postWin && (
+          <div className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+            <WinMessage />
+          </div>
+        )}
+        <div className=" rotate-[315deg] absolute top-[50vh]">
           <Wheel
             startingOptionIndex={0}
             mustStartSpinning={isSpinnig}
@@ -166,12 +170,6 @@ export default function SpinWheel() {
           >
             {"SPIN"}
           </button>
-
-          {postWin && (
-            <div className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
-              <WinMessage />
-            </div>
-          )}
         </div>
       </div>
     </MainCard>
