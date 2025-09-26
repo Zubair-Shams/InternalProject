@@ -9,6 +9,13 @@ module.exports = {
         primary: "var(--primary, #3b82f6)",
         secondary: "var(--secondary, #64748b)",
         accent: "var(--accent, #f59e0b)",
+        wheel: {
+          orange: "#FB8B00", // 🎨 Orange
+          teal: "#00ACC2", // 🎨 Teal Blue
+          white: "#FFFFFF", // 🎨 White
+          red: "#DF3B37", // 🎨 Red
+          dark: "#474747", // 🎨 Dark Gray (center)
+        },
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],

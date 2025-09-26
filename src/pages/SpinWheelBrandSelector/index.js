@@ -1,24 +1,24 @@
 import MainCard from "components/mainCard.js";
 import React, { useState, useEffect } from "react";
 import { Wheel } from "react-custom-roulette";
-import { useNavigate } from "react-router-dom"; // ✅ add this
+import { useNavigate } from "react-router-dom";
 import Burberry from "assets/images/Burberry-logo-1.png";
-import Tesla from "assets/images/Tesla-Logo-1.png";
-import Armani from "assets/images/Armani-Logo-1.png";
 import ECO from "assets/images/Eco-Logo-1.png";
 import Prada from "assets/images/Prada-Logo-1.png";
-import Gucci from "assets/images/Gucci-Logo-1.png";
-import Natura from "assets/images/Natura-Logo-1.png";
 import WinMessage from "components/winMessage";
-
+// import Tesla from "assets/images/Tesla-Logo-1.png";
+// import Armani from "assets/images/Armani-Logo-1.png";
+// import Gucci from "assets/images/Gucci-Logo-1.png";
+// import Natura from "assets/images/Natura-Logo-1.png";
+import Pointer from "assets/images/spinner_pointer.png";
 const data = [
   {
     option: "Prada 15% OFF",
-    style: { backgroundColor: "#f44336", textColor: "white" },
+    style: { backgroundColor: "#FB8B00", textColor: "white" },
   },
   {
     option: "Burberry 25% OFF",
-    style: { backgroundColor: "#03a9f4", textColor: "white" },
+    style: { backgroundColor: "#00ACC2", textColor: "white" },
   },
   {
     option: "ECO 20% OFF",
@@ -26,11 +26,11 @@ const data = [
   },
   {
     option: "Prada 30% OFF",
-    style: { backgroundColor: "#FF8C00", textColor: "black" },
+    style: { backgroundColor: "#DF3B37", textColor: "black" },
   },
   {
     option: "Burberry 35% OFF",
-    style: { backgroundColor: "#1E90FF", textColor: "white" },
+    style: { backgroundColor: "#00ACC2", textColor: "white" },
   },
 ];
 
@@ -45,6 +45,11 @@ export default function SpinWheel() {
   const handleSpinClick = () => {
     if (!isSpinnig) {
       const newPrizeNumber = Math.floor(Math.random() * data.length);
+
+      // in case if we rotate the wheel
+      // const adjustedPrizeNumber =
+      //   (newPrizeNumber + Math.floor(data.length / 2)) % data.length;
+
       setPrizeNumber(newPrizeNumber);
       setIsSpinnig(true);
       setWinner(null); // Clear previous winner
@@ -118,38 +123,40 @@ export default function SpinWheel() {
             ))}
         </div>
 
-        <div className="relative">
+        <div className="relative rotate-[315deg]">
           <Wheel
-          
+            startingOptionIndex={0}
             mustStartSpinning={isSpinnig}
             prizeNumber={prizeNumber}
             data={data}
+            radiusLineColor={["black"]}
             onStopSpinning={handleStopSpinning}
-            backgroundColors={[
-              "#ff9800",
-              "#2196f3",
-              "#f44336",
-              "#03a9f4",
-              "#fff",
-            ]}
             textColors={["#000"]}
-            outerBorderWidth={12}
+            outerBorderWidth={20}
+            disableInitialAnimation={true}
             innerBorderColor="#000"
-            radiusLineColor={["tranparent"]}
-            outerBorderColor="#F01414"
+            outerBorderColor="#DF3B37"
             radiusLineWidth={2}
             textDistance={55}
             width={"800px"} // ⬅️ wheel diameter
             height={400}
-            pointerProps={{ style: { display: "none" } }}
+            perpendicularText={"hisdf"}
+            pointerProps={{
+              src: Pointer,
+              style: {
+                transform: "rotate(220deg)", // move pointer to bottom
+                top: "15px",
+                // left: "40%",
+              },
+            }}
           />
 
           <button
             onClick={handleSpinClick}
             disabled={isSpinnig}
             style={{ backgroundColor: "#353333" }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                     size-20  bg-black text-white rounded-full text-2xl font-bold 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  rotate-45
+                     size-20  bg-wheel-dark text-white rounded-full text-2xl font-bold 
                      hover:scale-105 transition-transform z-20 disabled:cursor-not-allowed"
           >
             {"SPIN"}
