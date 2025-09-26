@@ -14,23 +14,28 @@ import Pointer from "assets/images/spinner_pointer.png";
 const data = [
   {
     option: "Prada 15% OFF",
-    style: { backgroundColor: "#FB8B00", textColor: "white" },
+    style: { backgroundColor: "#FB8B00", textColor: "white", fontSize: 18 },
   },
   {
     option: "Burberry 25% OFF",
-    style: { backgroundColor: "#00ACC2", textColor: "white" },
+    style: {
+      backgroundColor: "#00ACC2",
+      textColor: "white",
+      width: "50px",
+      fontSize: 16,
+    },
   },
   {
     option: "ECO 20% OFF",
-    style: { backgroundColor: "#F5F5F5", textColor: "#000" },
+    style: { backgroundColor: "#F5F5F5", textColor: "#000", fontSize: 18 },
   },
   {
     option: "Prada 30% OFF",
-    style: { backgroundColor: "#DF3B37", textColor: "black" },
+    style: { backgroundColor: "#DF3B37", textColor: "black", fontSize: 18 },
   },
   {
-    option: "Burberry 35% OFF",
-    style: { backgroundColor: "#00ACC2", textColor: "white" },
+    option: "Burberry  35% OFF",
+    style: { backgroundColor: "#00ACC2", textColor: "white", fontSize: 17 },
   },
 ];
 
@@ -110,7 +115,7 @@ export default function SpinWheel() {
           </p>
         )}
 
-        <div className="flex ">
+        <div className="flex mb-2 ">
           {!postWin &&
             imsList.map((item, index) => (
               <div key={index} className="w-1/3 flex justify-center">
@@ -140,11 +145,11 @@ export default function SpinWheel() {
             textDistance={55}
             width={"800px"} // ⬅️ wheel diameter
             height={400}
-            perpendicularText={"hisdf"}
+            perpendicularText={false}
             pointerProps={{
               src: Pointer,
               style: {
-                transform: "rotate(220deg)", // move pointer to bottom
+                transform: "rotate(225deg)", // move pointer to bottom
                 top: "15px",
                 // left: "40%",
               },
