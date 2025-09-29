@@ -10,7 +10,7 @@ import WinMessage from "components/winMessage";
 // import Armani from "assets/images/Armani-Logo-1.png";
 // import Gucci from "assets/images/Gucci-Logo-1.png";
 // import Natura from "assets/images/Natura-Logo-1.png";
-import Pointer from "assets/images/spinner_pointer.png";
+import PointerSVG from "assets/images/pointer2.svg";
 const data = [
   {
     option: "Prada 15% OFF",
@@ -127,7 +127,7 @@ export default function SpinWheel() {
               </div>
             ))}
         </div>
-        {postWin && (
+        {true && (
           <div className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
             <WinMessage />
           </div>
@@ -151,11 +151,12 @@ export default function SpinWheel() {
             height={400}
             perpendicularText={false}
             pointerProps={{
-              src: Pointer,
+              src: PointerSVG,
               style: {
-                transform: "rotate(225deg)", // move pointer to bottom
-                top: "15px",
-                // left: "40%",
+                transform: "rotate(45deg)", // move pointer to bottom
+                top: "36px",
+                right: "9px",
+                zIndex: 100,
               },
             }}
           />
