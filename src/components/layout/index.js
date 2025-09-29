@@ -13,7 +13,7 @@ const GameLayout = ({ children }) => {
       ></div>
 
       {/* Top Left Corner - Client Logo Placeholder */}
-      <div className="absolute top-4 left-4 z-20">
+      <div className="absolute top-12 left-20 md:left-1/4 z-20">
         <div className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2">
           <span className="text-gray-600 text-sm font-medium">CLIENT LOGO</span>
         </div>
