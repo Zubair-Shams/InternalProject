@@ -106,7 +106,7 @@ export default function SpinWheel() {
 
   return (
     <MainCard variant={"spinner"}>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center mt-20">
         {postWin ? (
           <h2 className="text-3xl text-black font-bold mb-8 text-center">
             YOU WON A{" "}
@@ -119,7 +119,7 @@ export default function SpinWheel() {
           </p>
         )}
 
-        <div className="flex mb-2 ">
+        <div className="flex mt-8 ">
           {!postWin &&
             imsList.map((item, index) => (
               <div key={index} className="w-1/3 flex justify-center">
@@ -131,8 +131,8 @@ export default function SpinWheel() {
               </div>
             ))}
         </div>
-        {true && (
-          <div className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+        {postWin && (
+          <div className="absolute  -bottom-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
             <WinMessage />
           </div>
         )}
