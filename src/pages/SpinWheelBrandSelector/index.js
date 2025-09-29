@@ -14,7 +14,11 @@ import PointerSVG from "assets/images/pointer2.svg";
 const data = [
   {
     option: "Prada 15% OFF",
-    style: { backgroundColor: "#FB8B00", textColor: "white", fontSize: 18 },
+    style: {
+      backgroundColor: "#FB8B00",
+      textColor: "white",
+      fontSize: 18,
+    },
   },
   {
     option: "Burberry 25% OFF",
@@ -149,7 +153,7 @@ export default function SpinWheel() {
             textDistance={55}
             width={"800px"} // ⬅️ wheel diameter
             height={400}
-            perpendicularText={false}
+            perpendicularText={true}
             pointerProps={{
               src: PointerSVG,
               style: {
