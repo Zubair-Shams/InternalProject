@@ -16,7 +16,7 @@ const data = [
     option: "Prada 15% OFF",
     style: {
       backgroundColor: "#FB8B00",
-      textColor: "white",
+      textColor: "black",
       fontSize: 18,
     },
   },
@@ -24,7 +24,7 @@ const data = [
     option: "Burberry 25% OFF",
     style: {
       backgroundColor: "#00ACC2",
-      textColor: "white",
+      textColor: "black",
       width: "50px",
       fontSize: 16,
     },
@@ -39,7 +39,7 @@ const data = [
   },
   {
     option: "Burberry  35% OFF",
-    style: { backgroundColor: "#00ACC2", textColor: "white", fontSize: 17 },
+    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 17 },
   },
 ];
 
