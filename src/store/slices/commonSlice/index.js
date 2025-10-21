@@ -37,20 +37,43 @@ const initState = {
   // brands
   brands: [
     {
+      id: 1,
       name: "Burberry",
       logo: burberryLogo,
       className: "w-full h-14 object-contain",
     },
     {
+      id: 2,
       name: "Giorgio Armani",
       logo: armaniLogo,
       className: "w-full h-14 object-contain",
     },
-    { name: "Prada", logo: pradaLogo, className: "w-full h-18 object-contain" },
-    { name: "Gucci", logo: gucciLogo, className: "w-full h-18 object-contain" },
-    { name: "ECO", logo: ecoLogo, className: "w-full h-14 object-contain" },
-    { name: "Tesla", logo: Tesla, className: "w-full h-14 object-contain" },
     {
+      id: 3,
+      name: "Prada",
+      logo: pradaLogo,
+      className: "w-full h-18 object-contain",
+    },
+    {
+      id: 4,
+      name: "Gucci",
+      logo: gucciLogo,
+      className: "w-full h-18 object-contain",
+    },
+    {
+      id: 5,
+      name: "ECO",
+      logo: ecoLogo,
+      className: "w-full h-14 object-contain",
+    },
+    {
+      id: 6,
+      name: "Tesla",
+      logo: Tesla,
+      className: "w-full h-14 object-contain",
+    },
+    {
+      id: 7,
       name: "Natura & Co",
       logo: naturaLogo,
       className: "w-[60%] h-20 object-contain mx-auto",
@@ -112,6 +135,7 @@ export const commonSlice = createSlice({
 
     // Brand selection actions
     selectBrand: (state, action) => {
+      debugger;
       const brand = action.payload;
       if (!state.selectedBrands.find((b) => b.id === brand.id)) {
         state.selectedBrands.push(brand);
