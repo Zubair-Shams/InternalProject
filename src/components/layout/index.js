@@ -24,7 +24,7 @@ const GameLayout = ({ children }) => {
         <img
           src={BottomLogo}
           alt="Spin Stable Logo"
-          className="w-16 h-16 object-contain"
+          className="size-28 object-contain"
         />
       </div>
 
