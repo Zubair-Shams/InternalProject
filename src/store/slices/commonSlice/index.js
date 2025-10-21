@@ -1,82 +1,180 @@
-// src/features/user/userSlice.js
+// src/store/slices/commonSlice/index.js
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initState = {
-  isToggle: false,
-  theme: 'dark',
-  isDrawer: false,
-  editData: null,
-  customerList: [],
-  isNoticePopupConfirmed: false,
-  clearTableSelectedRows: false,
-  provincesList: [
-    {
-      label: 'Khyber Pakhtunkhwa',
-      value: '1',
-    },
-    {
-      label: 'Punjab',
-      value: '2',
-    },
-    {
-      label: 'Sindh',
-      value: '3',
-    },
-    {
-      label: 'Balochistan',
-      value: '4',
-    },
-    {
-      label: 'Islamabad Capital Territory (ICT)',
-      value: '5',
-    },
-    {
-      label: 'Gilgit-Baltistan',
-      value: '6',
-    },
-    {
-      label: 'Azad Jammu & Kashmir (AJK)',
-      value: '7',
-    },
+  // Game state
+  isSpinning: false,
+  hasSpun: false,
+  currentPrize: null,
+  spinCount: 0,
+  maxSpins: 3,
+
+  // User data
+  userData: {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+  },
+
+  // Game offers and brands
+  availableOffers: [
+    { id: 1, brand: "Prada", discount: "15% OFF", color: "#FB8B00" },
+    { id: 2, brand: "Burberry", discount: "25% OFF", color: "#00ACC2" },
+    { id: 3, brand: "ECO", discount: "20% OFF", color: "#F5F5F5" },
+    { id: 4, brand: "Prada", discount: "30% OFF", color: "#DF3B37" },
+    { id: 5, brand: "Burberry", discount: "35% OFF", color: "#00ACC2" },
   ],
+
+  // Selected brands
+  selectedBrands: [],
+
+  // Game settings
+  gameSettings: {
+    theme: "light",
+    soundEnabled: true,
+    animationsEnabled: true,
+  },
+
+  // UI state
+  showWinMessage: false,
+  currentStep: "register", // register, brands, spinwheel, offer, thankyou
+  isGameCompleted: false,
 };
 export const commonSlice = createSlice({
-  name: 'commonState',
+  name: "commonState",
   initialState: initState,
   reducers: {
-    togglesidebar: state => {
-      state.isToggle = !state.isToggle;
+    // Game control actions
+    startSpinning: (state) => {
+      state.isSpinning = true;
+      state.showWinMessage = false;
     },
-    toggleDrawer: state => {
-      state.isDrawer = !state.isDrawer;
+    stopSpinning: (state, action) => {
+      state.isSpinning = false;
+      state.hasSpun = true;
+      state.currentPrize = action.payload;
+      state.spinCount += 1;
+      state.showWinMessage = true;
     },
-    toggleTheme: state => {
-      state.theme = state.theme === 'light' ? 'dark' : 'light';
+    resetGame: (state) => {
+      state.isSpinning = false;
+      state.hasSpun = false;
+      state.currentPrize = null;
+      state.spinCount = 0;
+      state.showWinMessage = false;
+      state.isGameCompleted = false;
     },
-    toggleNoticPopup: state => {
-      state.isNoticePopupConfirmed = true;
+
+    // User data actions
+    setUserData: (state, action) => {
+      state.userData = { ...state.userData, ...action.payload };
     },
-    handleClearTableRows: (state, action) => {
-      state.clearTableSelectedRows = action.payload;
+    clearUserData: (state) => {
+      state.userData = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+      };
     },
-    handleSetCustomerName: (state, action) => {
-      state.customerList = action.payload;
+
+    // Brand selection actions
+    selectBrand: (state, action) => {
+      const brand = action.payload;
+      if (!state.selectedBrands.find((b) => b.id === brand.id)) {
+        state.selectedBrands.push(brand);
+      }
     },
-    handleSetProvinces: (state, action) => {
-      state.provincesList = action.payload;
+    removeBrand: (state, action) => {
+      state.selectedBrands = state.selectedBrands.filter(
+        (brand) => brand.id !== action.payload
+      );
+    },
+    clearSelectedBrands: (state) => {
+      state.selectedBrands = [];
+    },
+
+    // Navigation actions
+    setCurrentStep: (state, action) => {
+      state.currentStep = action.payload;
+    },
+    nextStep: (state) => {
+      const steps = ["register", "brands", "spinwheel", "offer", "thankyou"];
+      const currentIndex = steps.indexOf(state.currentStep);
+      if (currentIndex < steps.length - 1) {
+        state.currentStep = steps[currentIndex + 1];
+      }
+    },
+    previousStep: (state) => {
+      const steps = ["register", "brands", "spinwheel", "offer", "thankyou"];
+      const currentIndex = steps.indexOf(state.currentStep);
+      if (currentIndex > 0) {
+        state.currentStep = steps[currentIndex - 1];
+      }
+    },
+
+    // Game settings actions
+    toggleTheme: (state) => {
+      state.gameSettings.theme =
+        state.gameSettings.theme === "light" ? "dark" : "light";
+    },
+    toggleSound: (state) => {
+      state.gameSettings.soundEnabled = !state.gameSettings.soundEnabled;
+    },
+    toggleAnimations: (state) => {
+      state.gameSettings.animationsEnabled =
+        !state.gameSettings.animationsEnabled;
+    },
+
+    // Win message actions
+    showWinMessage: (state) => {
+      state.showWinMessage = true;
+    },
+    hideWinMessage: (state) => {
+      state.showWinMessage = false;
+    },
+
+    // Game completion
+    completeGame: (state) => {
+      state.isGameCompleted = true;
+      state.currentStep = "thankyou";
     },
   },
 });
 
 export const {
-  togglesidebar,
+  // Game control actions
+  startSpinning,
+  stopSpinning,
+  resetGame,
+
+  // User data actions
+  setUserData,
+  clearUserData,
+
+  // Brand selection actions
+  selectBrand,
+  removeBrand,
+  clearSelectedBrands,
+
+  // Navigation actions
+  setCurrentStep,
+  nextStep,
+  previousStep,
+
+  // Game settings actions
   toggleTheme,
-  toggleDrawer,
-  toggleNoticPopup,
-  handleClearTableRows,
-  handleSetCustomerName,
-  handleSetProvinces,
+  toggleSound,
+  toggleAnimations,
+
+  // Win message actions
+  showWinMessage,
+  hideWinMessage,
+
+  // Game completion
+  completeGame,
 } = commonSlice.actions;
 
 export default commonSlice.reducer;
