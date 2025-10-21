@@ -135,7 +135,6 @@ export const commonSlice = createSlice({
 
     // Brand selection actions
     selectBrand: (state, action) => {
-      debugger;
       const brand = action.payload;
       if (!state.selectedBrands.find((b) => b.id === brand.id)) {
         state.selectedBrands.push(brand);
