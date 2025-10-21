@@ -1,4 +1,11 @@
 // src/store/slices/commonSlice/index.js
+import burberryLogo from "assets/images/Burberry-logo-1.png";
+import armaniLogo from "assets/images/Armani-Logo-1.png";
+import pradaLogo from "assets/images/Prada-Logo-1.png";
+import gucciLogo from "assets/images/Gucci-Logo-1.png";
+import ecoLogo from "assets/images/Eco-Logo-1.png";
+import naturaLogo from "assets/images/Natura-Logo-1.png";
+import Tesla from "assets/images/Tesla-Logo-1.png";
 
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -25,6 +32,29 @@ const initState = {
     { id: 3, brand: "ECO", discount: "20% OFF", color: "#F5F5F5" },
     { id: 4, brand: "Prada", discount: "30% OFF", color: "#DF3B37" },
     { id: 5, brand: "Burberry", discount: "35% OFF", color: "#00ACC2" },
+  ],
+
+  // brands
+  brands: [
+    {
+      name: "Burberry",
+      logo: burberryLogo,
+      className: "w-full h-14 object-contain",
+    },
+    {
+      name: "Giorgio Armani",
+      logo: armaniLogo,
+      className: "w-full h-14 object-contain",
+    },
+    { name: "Prada", logo: pradaLogo, className: "w-full h-18 object-contain" },
+    { name: "Gucci", logo: gucciLogo, className: "w-full h-18 object-contain" },
+    { name: "ECO", logo: ecoLogo, className: "w-full h-14 object-contain" },
+    { name: "Tesla", logo: Tesla, className: "w-full h-14 object-contain" },
+    {
+      name: "Natura & Co",
+      logo: naturaLogo,
+      className: "w-[60%] h-20 object-contain mx-auto",
+    }, // ✅ centered & smaller
   ],
 
   // Selected brands

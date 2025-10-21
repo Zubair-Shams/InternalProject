@@ -1,40 +1,13 @@
 import React from "react";
-// Import brand logos
-import burberryLogo from "assets/images/Burberry-logo-1.png";
-import armaniLogo from "assets/images/Armani-Logo-1.png";
-import pradaLogo from "assets/images/Prada-Logo-1.png";
-import gucciLogo from "assets/images/Gucci-Logo-1.png";
-import ecoLogo from "assets/images/Eco-Logo-1.png";
-import naturaLogo from "assets/images/Natura-Logo-1.png";
-import Tesla from "assets/images/Tesla-Logo-1.png";
+
 import MainCard from "components/mainCard.js";
 import ButterFluBottomLeft from "assets/images/Butterfly-3.png";
 import { useNavigate } from "react-router-dom";
-
-const brands = [
-  {
-    name: "Burberry",
-    logo: burberryLogo,
-    className: "w-full h-14 object-contain",
-  },
-  {
-    name: "Giorgio Armani",
-    logo: armaniLogo,
-    className: "w-full h-14 object-contain",
-  },
-  { name: "Prada", logo: pradaLogo, className: "w-full h-18 object-contain" },
-  { name: "Gucci", logo: gucciLogo, className: "w-full h-18 object-contain" },
-  { name: "ECO", logo: ecoLogo, className: "w-full h-14 object-contain" },
-  { name: "Tesla", logo: Tesla, className: "w-full h-14 object-contain" },
-  {
-    name: "Natura & Co",
-    logo: naturaLogo,
-    className: "w-[60%] h-20 object-contain mx-auto",
-  }, // ✅ centered & smaller
-];
+import { useSelector } from "react-redux";
 
 const Brands = () => {
   const Navigate = useNavigate();
+  const brands = useSelector((state) => state.commonState.brands);
   return (
     <MainCard variant={"brands"}>
       <div className="relative">
