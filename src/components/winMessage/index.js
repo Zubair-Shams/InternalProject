@@ -5,6 +5,7 @@ const WinMessage = () => {
     <img
       src={WinImage}
       alt="you-win"
+      className="w-full"
       style={{
         animation: "bounceIn 0.8s ease-out",
       }}
