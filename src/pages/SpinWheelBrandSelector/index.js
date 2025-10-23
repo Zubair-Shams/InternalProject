@@ -136,7 +136,8 @@ export default function SpinWheel() {
             <WinMessage />
           </div>
         )}
-        <div className=" rotate-[315deg] absolute top-[50vh]">
+        <div className="fixed rotate-[315deg] bottom-0 translate-y-[10rem] transform  z-10">
+          {/* <div className=" rotate-[315deg] absolute top-1/2 translate-y-96"> */}
           <Wheel
             startingOptionIndex={0}
             mustStartSpinning={isSpinnig}
