@@ -88,7 +88,7 @@ const Register = () => {
                   value={formData[field.name]}
                   onChange={handleInputChange}
                   placeholder={field.placeholder}
-                  className="w-full px-4 py-5 border-2 border-orange-500 bg-white text-black placeholder-black focus:outline-none focus:border-orange-600 transition-colors"
+                  className="w-full px-6 py-5 border-2 border-orange-500 bg-white text-black text-xl font-medium placeholder-gray-600 placeholder:text-lg placeholder:font-semibold focus:outline-none focus:border-orange-600 transition-colors "
                   required={field.required}
                 />
               </div>
