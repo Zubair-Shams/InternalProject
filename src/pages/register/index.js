@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MainCard from "components/mainCard.js";
 import Button from "components/Button";
 import Input from "components/Form/input";
+
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -11,6 +12,36 @@ const Register = () => {
     email: "",
     phoneNumber: "",
   });
+
+  // Define the form fields array at the top of your component or outside
+  const formFields = [
+    {
+      name: "firstName",
+      type: "text",
+      placeholder: "First Name",
+      required: true,
+    },
+    {
+      name: "lastName",
+      type: "text",
+      placeholder: "Last Name",
+      required: true,
+    },
+    {
+      name: "email",
+      type: "email",
+      placeholder: "Email",
+      required: true,
+    },
+    {
+      name: "phoneNumber",
+      type: "tel",
+      placeholder: "Phone Number",
+      required: true,
+    },
+  ];
+
+  // In your JSX:
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,53 +80,19 @@ const Register = () => {
 
           {/* Input Fields */}
           <div className="space-y-4">
-            <div>
-              <Input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                placeholder="First Name"
-                className="w-full px-4 py-5 border-2 border-orange-500 bg-white text-black placeholder-black focus:outline-none focus:border-orange-600 transition-colors"
-                required
-              />
-            </div>
-
-            <div>
-              <Input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                placeholder="Last Name"
-                className="w-full px-4 py-5 border-2 border-orange-500 bg-white text-black placeholder-black focus:outline-none focus:border-orange-600 transition-colors"
-                required
-              />
-            </div>
-
-            <div>
-              <Input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="Email"
-                className="w-full px-4 py-5 border-2 border-orange-500 bg-white text-black placeholder-black focus:outline-none focus:border-orange-600 transition-colors"
-                required
-              />
-            </div>
-
-            <div>
-              <Input
-                type="tel"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleInputChange}
-                placeholder="Phone Number"
-                className="w-full px-4 py-5 border-2 border-orange-500 bg-white text-black placeholder-black focus:outline-none focus:border-orange-600 transition-colors"
-                required
-              />
-            </div>
+            {formFields.map((field) => (
+              <div key={field.name}>
+                <Input
+                  type={field.type}
+                  name={field.name}
+                  value={formData[field.name]}
+                  onChange={handleInputChange}
+                  placeholder={field.placeholder}
+                  className="w-full px-4 py-5 border-2 border-orange-500 bg-white text-black placeholder-black focus:outline-none focus:border-orange-600 transition-colors"
+                  required={field.required}
+                />
+              </div>
+            ))}
           </div>
 
           {/* Submit Button */}
