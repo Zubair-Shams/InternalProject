@@ -152,8 +152,6 @@ export default function SpinWheel() {
             outerBorderColor="#DF3B37"
             radiusLineWidth={2}
             textDistance={55}
-            width={"800px"} // ⬅️ wheel diameter
-            height={400}
             perpendicularText={true}
             pointerProps={{
               src: PointerSVG,
