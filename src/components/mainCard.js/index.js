@@ -79,9 +79,8 @@ const MainCard = ({
                 {buttons.map((button, idx) => (
                   <button
                     key={idx}
-                    className="bg-dark mt-4 w-auto h-14 text-white px-12 py-2 rounded-xl text-xl mx-4"
+                    className={`mt-4 text-white  rounded-xl  mx-4 ${button.classes}`}
                     onClick={button.onClick}
-                    style={{ backgroundColor: "#484444" }}
                   >
                     {button.title}
                   </button>
@@ -152,7 +151,7 @@ const MainCard = ({
         SPIN, WIN & SAVE
       </h1>
       <div
-        className={`relative rounded-lg p-6  min-w-[45vw] max-w-[50vw] min-h-[50vh] max-h-[70vh] mx-auto no-scrollbar ${
+        className={`relative rounded-lg p-6  min-w-[45vw] max-w-[50vw] min-h-[50vh] mx-auto no-scrollbar ${
           variant !== "spinner" ? "border-[14px] border-solid shadow-lg" : ""
         }`}
         style={

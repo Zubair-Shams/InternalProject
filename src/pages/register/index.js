@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButterflyLeft from "assets/images/Butterfly-1.png";
 import MainCard from "components/mainCard.js";
+import Button from "components/Button";
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -28,6 +29,19 @@ const Register = () => {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center px-4 ">
       <MainCard variant={"register"}>
+        {/* TAHNK YOU PAGE CONTENT */}
+
+        <p className="text-white text-5xl font-medium text-center mb-4">
+          We'd like to say
+        </p>
+        <h2 className="text-black text-6xl md:text-8xl font-bold text-center mb-4">
+          THANK YOU
+        </h2>
+        <div className="text-center w-full ">
+          <p className="text-white text-5xl font-medium  w-[37rem] mx-auto">
+            We hope you enjoy a fun day of shopping with your offer
+          </p>
+        </div>
         <img
           src={ButterflyLeft}
           alt="butterfly-left"
@@ -36,7 +50,7 @@ const Register = () => {
 
         <form onSubmit={handleSubmit}>
           {/* Form Header */}
-          <p className="text-black text-lg font-medium mb-6 text-center">
+          <p className="text-white/80 text-5xl font-medium my-4 text-center">
             Please fill out your contact information below
           </p>
 
@@ -92,12 +106,15 @@ const Register = () => {
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full mt-6 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 bg-black"
-          >
-            Tap to register
-          </button>
+          <div className="flex content-center justify-center">
+            <Button
+              title={"Tap to Register"}
+              classes={
+                "w-[240px] mt-6 bg-darkGreen text-2xl text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none"
+              }
+              type="submit"
+            />
+          </div>
         </form>
       </MainCard>
     </div>

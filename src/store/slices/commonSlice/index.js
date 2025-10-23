@@ -76,7 +76,7 @@ const initState = {
       id: 7,
       name: "Natura & Co",
       logo: naturaLogo,
-      className: "w-[60%] h-20 object-contain mx-auto",
+      className: "w-full h-20 object-contain mx-auto",
     }, // ✅ centered & smaller
   ],
 

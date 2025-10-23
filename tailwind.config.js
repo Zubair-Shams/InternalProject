@@ -9,6 +9,7 @@ module.exports = {
         primary: "var(--primary, #3b82f6)",
         secondary: "var(--secondary, #64748b)",
         accent: "var(--accent, #f59e0b)",
+        darkGreen: "#087530",
         wheel: {
           orange: "#FB8B00", // 🎨 Orange
           teal: "#00ACC2", // 🎨 Teal Blue
