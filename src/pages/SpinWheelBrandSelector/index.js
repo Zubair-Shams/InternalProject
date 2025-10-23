@@ -13,11 +13,11 @@ import WinMessage from "components/winMessage";
 import PointerSVG from "assets/images/pointer2.svg";
 const data = [
   {
-    option: "Prada 15% OFF",
+    option: "Prada  15% OFF",
     style: {
       backgroundColor: "#FB8B00",
       textColor: "black",
-      fontSize: 18,
+      fontSize: 20,
     },
   },
   {
@@ -26,20 +26,20 @@ const data = [
       backgroundColor: "#00ACC2",
       textColor: "black",
       width: "50px",
-      fontSize: 16,
+      fontSize: 19,
     },
   },
   {
     option: "ECO 20% OFF",
-    style: { backgroundColor: "#F5F5F5", textColor: "#000", fontSize: 18 },
+    style: { backgroundColor: "#F5F5F5", textColor: "#000", fontSize: 20 },
   },
   {
     option: "Prada 30% OFF",
-    style: { backgroundColor: "#DF3B37", textColor: "black", fontSize: 18 },
+    style: { backgroundColor: "#DF3B37", textColor: "black", fontSize: 20 },
   },
   {
     option: "Burberry  35% OFF",
-    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 17 },
+    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 19 },
   },
 ];
 
