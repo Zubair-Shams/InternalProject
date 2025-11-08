@@ -13,13 +13,14 @@ import WinMessage from "components/winMessage";
 import PointerSVG from "assets/images/pointer2.svg";
 import { useDispatch } from "react-redux";
 import { stopSpinning } from "store/slices/commonSlice";
+import { CustomSpinWheel } from "components/SpinWheel";
 const data = [
   {
     option: "Prada  15% OFF",
     style: {
       backgroundColor: "#FB8B00",
       textColor: "black",
-      fontSize: 20,
+      fontSize: 25,
     },
   },
   {
@@ -28,20 +29,20 @@ const data = [
       backgroundColor: "#00ACC2",
       textColor: "black",
       width: "50px",
-      fontSize: 19,
+      fontSize: 25,
     },
   },
   {
     option: "ECO 20% OFF",
-    style: { backgroundColor: "#F5F5F5", textColor: "#000", fontSize: 20 },
+    style: { backgroundColor: "#F5F5F5", textColor: "#000", fontSize: 25 },
   },
   {
     option: "Prada 30% OFF",
-    style: { backgroundColor: "#DF3B37", textColor: "black", fontSize: 20 },
+    style: { backgroundColor: "#DF3B37", textColor: "black", fontSize: 25 },
   },
   {
     option: "Burberry  35% OFF",
-    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 19 },
+    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 25 },
   },
 ];
 
@@ -166,39 +167,21 @@ export default function SpinWheel() {
             <WinMessage />
           </div>
         )}
-        <div className="fixed rotate-[315deg] bottom-0 translate-y-[10rem] transform  z-10">
+        <div className="fixed  bottom-0 translate-y-[10rem] transform  z-10">
           {/* <div className=" rotate-[315deg] absolute top-1/2 translate-y-96"> */}
-          <Wheel
-            startingOptionIndex={0}
+          <CustomSpinWheel
+            data={data}
             mustStartSpinning={isSpinnig}
             prizeNumber={prizeNumber}
-            data={data}
-            radiusLineColor={["black"]}
             onStopSpinning={handleStopSpinning}
-            textColors={["#000"]}
-            outerBorderWidth={20}
-            disableInitialAnimation={true}
-            innerBorderColor="#000"
-            outerBorderColor="#DF3B37"
-            radiusLineWidth={2}
-            textDistance={55}
-            perpendicularText={true}
-            pointerProps={{
-              src: PointerSVG,
-              style: {
-                transform: "rotate(45deg)", // move pointer to bottom
-                top: "36px",
-                right: "9px",
-                zIndex: 100,
-              },
-            }}
+            size={600}
           />
 
           <button
             onClick={handleSpinClick}
             disabled={isSpinnig}
             style={{ backgroundColor: "#353333" }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  rotate-45
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  
                      size-20  bg-wheel-dark text-white rounded-full text-2xl font-bold 
                      hover:scale-105 transition-transform z-20 disabled:cursor-not-allowed"
           >
