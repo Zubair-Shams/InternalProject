@@ -1,12 +1,12 @@
 import MainCard from "components/mainCard.js";
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+// import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ThankYou = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const currentPrize = useSelector((state) => state.commonState.currentPrize);
-  const userData = useSelector((state) => state.commonState.userData);
+  // const userData = useSelector((state) => state.commonState.userData);
 
   // Get offer information for display
   const getOfferText = () => {
@@ -18,12 +18,6 @@ const ThankYou = () => {
     return "your offer";
   };
 
-  const getEmailText = () => {
-    if (userData && userData.email) {
-      return userData.email;
-    }
-    return "your email address";
-  };
   // useEffect(() => {
   //   const timer = setTimeout(() => {
   //     navigate("/register");

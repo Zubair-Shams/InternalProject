@@ -1,6 +1,5 @@
 import MainCard from "components/mainCard.js";
 import React, { useState, useEffect } from "react";
-import { Wheel } from "react-custom-roulette";
 import { useNavigate } from "react-router-dom";
 import Burberry from "assets/images/Burberry-logo-1.png";
 import ECO from "assets/images/Eco-Logo-1.png";
@@ -10,9 +9,10 @@ import WinMessage from "components/winMessage";
 // import Armani from "assets/images/Armani-Logo-1.png";
 // import Gucci from "assets/images/Gucci-Logo-1.png";
 // import Natura from "assets/images/Natura-Logo-1.png";
-import PointerSVG from "assets/images/pointer2.svg";
+// import PointerSVG from "assets/images/pointer2.svg";
 import { useDispatch } from "react-redux";
 import { stopSpinning } from "store/slices/commonSlice";
+import { CustomSpinWheel } from "components/SpinWheel";
 const data = [
   {
     option: "Prada  15% OFF",
@@ -28,7 +28,7 @@ const data = [
       backgroundColor: "#00ACC2",
       textColor: "black",
       width: "50px",
-      fontSize: 19,
+      fontSize: 20,
     },
   },
   {
@@ -41,7 +41,7 @@ const data = [
   },
   {
     option: "Burberry  35% OFF",
-    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 19 },
+    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 20 },
   },
 ];
 
@@ -136,7 +136,7 @@ export default function SpinWheel() {
 
   return (
     <MainCard variant={"spinner"}>
-      <div className="flex flex-col items-center mt-20">
+      <div className="flex flex-col items-center mt-6">
         {postWin ? (
           <h2 className="text-3xl text-black font-bold mb-8 text-center">
             YOU WON A{" "}
@@ -166,43 +166,23 @@ export default function SpinWheel() {
             <WinMessage />
           </div>
         )}
-        <div className="fixed rotate-[315deg] bottom-0 translate-y-[10rem] transform  z-10">
-          {/* <div className=" rotate-[315deg] absolute top-1/2 translate-y-96"> */}
-          <Wheel
-            startingOptionIndex={0}
+        <div className="fixed  bottom-0 translate-y-[17rem] transform  z-10">
+          <CustomSpinWheel
+            data={data}
             mustStartSpinning={isSpinnig}
             prizeNumber={prizeNumber}
-            data={data}
-            radiusLineColor={["black"]}
             onStopSpinning={handleStopSpinning}
-            textColors={["#000"]}
-            outerBorderWidth={20}
-            disableInitialAnimation={true}
-            innerBorderColor="#000"
-            outerBorderColor="#DF3B37"
-            radiusLineWidth={2}
-            textDistance={55}
-            perpendicularText={true}
-            pointerProps={{
-              src: PointerSVG,
-              style: {
-                transform: "rotate(45deg)", // move pointer to bottom
-                top: "36px",
-                right: "9px",
-                zIndex: 100,
-              },
-            }}
+            size={700}
           />
 
           <button
             onClick={handleSpinClick}
             disabled={isSpinnig}
-            style={{ backgroundColor: "#353333" }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  rotate-45
-                     size-20  bg-wheel-dark text-white rounded-full text-2xl font-bold 
-                     hover:scale-105 transition-transform z-20 disabled:cursor-not-allowed"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  
+                     size-36 bg-wheel-dark text-white rounded-full text-2xl font-bold 
+                     hover:scale-105 transition-transform z-20 disabled:cursor-not-allowed bg-transparent"
           >
-            {"SPIN"}
+            {isSpinnig ? "" : ""}
           </button>
         </div>
       </div>
