@@ -11,6 +11,8 @@ import WinMessage from "components/winMessage";
 // import Gucci from "assets/images/Gucci-Logo-1.png";
 // import Natura from "assets/images/Natura-Logo-1.png";
 import PointerSVG from "assets/images/pointer2.svg";
+import { useDispatch } from "react-redux";
+import { stopSpinning } from "store/slices/commonSlice";
 const data = [
   {
     option: "Prada  15% OFF",
@@ -44,12 +46,31 @@ const data = [
 ];
 
 export default function SpinWheel() {
+  const dispatch = useDispatch();
+  // const isSpinnig = useSelector((state) => state.commonState.isSpinning);
   const [isSpinnig, setIsSpinnig] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [winner, setWinner] = useState("");
   const [postWin, setpostWin] = useState(false);
 
   const navigate = useNavigate(); // ✅ initialize router navigation
+
+  // Helper functions to extract brand and discount from option text
+  const getWinnerBrandFromOption = (option) => {
+    if (!!option) {
+      const spaceIndex = option.indexOf(" ");
+      return option.substring(0, spaceIndex).trim();
+    }
+    return "";
+  };
+
+  const getWinnerDiscountFromOption = (option) => {
+    if (!!option) {
+      const spaceIndex = option.indexOf(" ");
+      return option.substring(spaceIndex).trim();
+    }
+    return "";
+  };
 
   const handleSpinClick = () => {
     if (!isSpinnig) {
@@ -68,7 +89,16 @@ export default function SpinWheel() {
   const handleStopSpinning = () => {
     setpostWin(true);
     setIsSpinnig(false);
-    setWinner(data[prizeNumber].option);
+    const winningOption = data[prizeNumber].option;
+    setWinner(winningOption);
+    // Store the offer in Redux
+    dispatch(
+      stopSpinning({
+        option: winningOption,
+        brand: getWinnerBrandFromOption(winningOption),
+        discount: getWinnerDiscountFromOption(winningOption),
+      })
+    );
   };
 
   const getWinnerBrand = () => {
