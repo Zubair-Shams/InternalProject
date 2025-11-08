@@ -190,12 +190,14 @@ export const CustomSpinWheel = ({
 
       animate();
     }
+    // eslint-disable-next-line
   }, [mustStartSpinning, prizeNumber]);
 
   // Initial draw
   useEffect(() => {
     drawWheel(rotation);
-  }, [data, size]);
+    // eslint-disable-next-line
+  }, [data, size, rotation]);
 
   useEffect(() => {
     return () => {

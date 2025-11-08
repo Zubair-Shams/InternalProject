@@ -1,6 +1,5 @@
 import MainCard from "components/mainCard.js";
 import React, { useState, useEffect } from "react";
-import { Wheel } from "react-custom-roulette";
 import { useNavigate } from "react-router-dom";
 import Burberry from "assets/images/Burberry-logo-1.png";
 import ECO from "assets/images/Eco-Logo-1.png";
@@ -10,7 +9,7 @@ import WinMessage from "components/winMessage";
 // import Armani from "assets/images/Armani-Logo-1.png";
 // import Gucci from "assets/images/Gucci-Logo-1.png";
 // import Natura from "assets/images/Natura-Logo-1.png";
-import PointerSVG from "assets/images/pointer2.svg";
+// import PointerSVG from "assets/images/pointer2.svg";
 import { useDispatch } from "react-redux";
 import { stopSpinning } from "store/slices/commonSlice";
 import { CustomSpinWheel } from "components/SpinWheel";
