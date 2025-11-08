@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import MainCard from "components/mainCard.js";
 import Button from "components/Button";
 import Input from "components/Form/input";
+import { setUserData } from "store/slices/commonSlice";
 
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const currentPrize = useSelector((state) => state.commonState.currentPrize);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -54,13 +58,26 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    navigate("/brands");
+    // Save user data to Redux
+    dispatch(setUserData(formData));
+    // Navigate to thank you page
+    navigate("/thankyou");
+  };
+
+  // Get offer information for display
+  const getOfferText = () => {
+    if (currentPrize) {
+      const brand = currentPrize.brand || "";
+      const discount = currentPrize.discount || "";
+      return `${brand} ${discount}`;
+    }
+    return "your offer";
   };
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center px-4 ">
       <MainCard variant={"register"}>
-        {/* TAHNK YOU PAGE CONTENT */}
+        {/* THANK YOU PAGE CONTENT */}
 
         <p className="text-white text-3xl md:text-4xl font-normal">
           We'd like to say
@@ -69,7 +86,9 @@ const Register = () => {
           THANK YOU
         </h2>
         <p className="text-white text-2xl md:text-3xl font-normal max-w-3xl mx-auto px-4">
-          We hope you enjoy a fun day of shopping with your offer
+          Congratulations! You won{" "}
+          <span className="font-bold text-yellow-300">{getOfferText()}</span>.
+          Your offer details will be sent to your email address shortly.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
