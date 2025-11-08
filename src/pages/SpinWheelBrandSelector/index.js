@@ -178,9 +178,9 @@ export default function SpinWheel() {
           <button
             onClick={handleSpinClick}
             disabled={isSpinnig}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  
-                     size-36 bg-wheel-dark text-white rounded-full text-2xl font-bold 
-                     hover:scale-105 transition-transform z-20 disabled:cursor-not-allowed bg-transparent"
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  
+                     size-32 rounded-full text-white  text-2xl font-bold 
+                     hover:scale-105 transition-transform z-20 disabled:cursor-not-allowed bg-transparent`}
           >
             {isSpinnig ? "" : ""}
           </button>

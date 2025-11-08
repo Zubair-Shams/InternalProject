@@ -12,12 +12,13 @@ const Offer = () => {
       buttons={[
         {
           title: "Tap to spin Again",
-          classes: "bg-primary text-3xl font-semibold h-16 w-[260px]",
+          classes: "bg-primary text-3xl font-semibold h-16 w-[260px] min-h-fit",
           onClick: () => Navigate("/spinwheel"),
         },
         {
           title: "Tap to accept offer",
-          classes: "bg-darkGreen text-3xl font-semibold h-16 w-[260px]",
+          classes:
+            "bg-darkGreen text-3xl font-semibold h-16 w-[260px] min-h-fit",
           onClick: () => Navigate("/register"),
         },
       ]}
