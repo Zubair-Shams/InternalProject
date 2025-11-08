@@ -1,17 +1,36 @@
 import MainCard from "components/mainCard.js";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ThankYou = () => {
   const navigate = useNavigate();
+  const currentPrize = useSelector((state) => state.commonState.currentPrize);
+  const userData = useSelector((state) => state.commonState.userData);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/register");
-    }, 4000);
+  // Get offer information for display
+  const getOfferText = () => {
+    if (currentPrize) {
+      const brand = currentPrize.brand || "";
+      const discount = currentPrize.discount || "";
+      return `${brand} ${discount}`;
+    }
+    return "your offer";
+  };
 
-    return () => clearTimeout(timer); // cleanup
-  }, [navigate]);
+  const getEmailText = () => {
+    if (userData && userData.email) {
+      return userData.email;
+    }
+    return "your email address";
+  };
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     navigate("/register");
+  //   }, 5000); // Increased to 5 seconds to give user time to read
+
+  //   return () => clearTimeout(timer); // cleanup
+  // }, [navigate]);
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center px-4 w-5/6">
@@ -19,7 +38,7 @@ const ThankYou = () => {
         variant={"thankyou"}
         heading="We'd like to say"
         subHeading="THANK YOU"
-        description="We hope you enjoy a fun day of shopping with your offer"
+        description={`Congratulations! You won ${getOfferText()}. We hope you enjoy a fun day of shopping with your offer!`}
         backgroundColor="#FF8C00"
         borderColor="#F01414"
       />
