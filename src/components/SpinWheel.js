@@ -48,28 +48,48 @@ export const CustomSpinWheel = ({
       ctx.lineWidth = 3;
       ctx.stroke();
 
-      // Draw text vertically (word by word - better readability)
+      // Draw text with improved layout
       ctx.save();
       ctx.rotate(startAngle + segmentAngle / 2);
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillStyle = segment.style.textColor;
-      ctx.font = `bold ${segment.style.fontSize || 18}px Arial`;
 
-      const textRadius = radius * 0.7;
-      // Split text into words for vertical display
-      const text = segment.option.replace(/\s+/g, " ").trim(); // Clean up spaces
-      const words = text.split(" ").filter((word) => word.length > 0); // Split by spaces and remove empty strings
+      const textRadius = radius * 0.65;
+      const text = segment.option.replace(/\s+/g, " ").trim();
 
-      // Calculate total height needed for vertical text
-      const lineHeight = (segment.style.fontSize || 18) * 1.3; // Line height between words
-      const totalHeight = words.length * lineHeight;
-      const startY = -totalHeight / 2 + lineHeight / 2;
+      // Parse brand name and discount
+      const percentageMatch = text.match(/(\d+%\s*OFF?)/i);
+      let brandName = "";
+      let discount = "";
 
-      words.forEach((word, i) => {
-        const yOffset = startY + i * lineHeight;
-        ctx.fillText(word, textRadius, yOffset);
-      });
+      if (percentageMatch) {
+        const percentageIndex = text.indexOf(percentageMatch[0]);
+        brandName = text.substring(0, percentageIndex).trim();
+        discount = percentageMatch[0].trim();
+      } else {
+        const words = text.split(" ").filter((word) => word.length > 0);
+        if (words.length >= 2) {
+          brandName = words[0];
+          discount = words.slice(1).join(" ");
+        } else {
+          brandName = text;
+        }
+      }
+
+      // Draw brand name (larger, bolder)
+      if (brandName) {
+        ctx.font = `bold ${Math.floor(
+          (segment.style.fontSize || 18) * 1.3
+        )}px Arial`;
+        ctx.fillText(brandName.toUpperCase(), textRadius, -12);
+      }
+
+      // Draw discount (slightly smaller)
+      if (discount) {
+        ctx.font = `bold ${segment.style.fontSize || 18}px Arial`;
+        ctx.fillText(discount.toUpperCase(), textRadius, 12);
+      }
 
       ctx.restore();
     });
@@ -99,6 +119,15 @@ export const CustomSpinWheel = ({
     ctx.lineWidth = 3;
     ctx.stroke();
 
+    // Draw "SPIN" text in center
+    ctx.save();
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = `bold ${size * 0.08}px Arial`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("SPIN", centerX, centerY);
+    ctx.restore();
+
     // Draw pointer at top
     ctx.save();
     ctx.translate(centerX, centerY - radius);
@@ -125,31 +154,19 @@ export const CustomSpinWheel = ({
     if (mustStartSpinning && !isSpinning) {
       setIsSpinning(true);
 
-      // Normalize current rotation to 0-2π range
       const currentRotationNormalized = rotation % (2 * Math.PI);
-
-      // Calculate the angle to align the winning segment with the pointer at top
-      // The winning segment's center angle (from 0 position)
       const winningSegmentCenterAngle =
         prizeNumber * segmentAngle + segmentAngle / 2;
-
-      // Calculate how much we need to rotate to get to the winning position
-      // We want the winning segment centered at the top (0 radians after normalization)
       const targetAngle = 2 * Math.PI - winningSegmentCenterAngle;
-
-      // Calculate the shortest path to target, accounting for current position
       let angleDifference = targetAngle - currentRotationNormalized;
 
-      // Normalize to always spin forward
       if (angleDifference < 0) {
         angleDifference += 2 * Math.PI;
       }
 
-      // Add extra full rotations for the spinning effect
       const spins = 5;
       const totalRotationDistance = spins * 2 * Math.PI + angleDifference;
-
-      const duration = 4000; // 4 seconds
+      const duration = 4000;
       const startTime = Date.now();
       const startRotation = rotation;
 

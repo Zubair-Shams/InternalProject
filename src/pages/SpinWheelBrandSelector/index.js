@@ -20,7 +20,7 @@ const data = [
     style: {
       backgroundColor: "#FB8B00",
       textColor: "black",
-      fontSize: 25,
+      fontSize: 20,
     },
   },
   {
@@ -29,20 +29,20 @@ const data = [
       backgroundColor: "#00ACC2",
       textColor: "black",
       width: "50px",
-      fontSize: 25,
+      fontSize: 20,
     },
   },
   {
     option: "ECO 20% OFF",
-    style: { backgroundColor: "#F5F5F5", textColor: "#000", fontSize: 25 },
+    style: { backgroundColor: "#F5F5F5", textColor: "#000", fontSize: 20 },
   },
   {
     option: "Prada 30% OFF",
-    style: { backgroundColor: "#DF3B37", textColor: "black", fontSize: 25 },
+    style: { backgroundColor: "#DF3B37", textColor: "black", fontSize: 20 },
   },
   {
     option: "Burberry  35% OFF",
-    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 25 },
+    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 20 },
   },
 ];
 
@@ -137,7 +137,7 @@ export default function SpinWheel() {
 
   return (
     <MainCard variant={"spinner"}>
-      <div className="flex flex-col items-center mt-20">
+      <div className="flex flex-col items-center mt-6">
         {postWin ? (
           <h2 className="text-3xl text-black font-bold mb-8 text-center">
             YOU WON A{" "}
@@ -167,25 +167,23 @@ export default function SpinWheel() {
             <WinMessage />
           </div>
         )}
-        <div className="fixed  bottom-0 translate-y-[10rem] transform  z-10">
-          {/* <div className=" rotate-[315deg] absolute top-1/2 translate-y-96"> */}
+        <div className="fixed  bottom-0 translate-y-[17rem] transform  z-10">
           <CustomSpinWheel
             data={data}
             mustStartSpinning={isSpinnig}
             prizeNumber={prizeNumber}
             onStopSpinning={handleStopSpinning}
-            size={600}
+            size={700}
           />
 
           <button
             onClick={handleSpinClick}
             disabled={isSpinnig}
-            style={{ backgroundColor: "#353333" }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  
-                     size-20  bg-wheel-dark text-white rounded-full text-2xl font-bold 
-                     hover:scale-105 transition-transform z-20 disabled:cursor-not-allowed"
+                     size-36 bg-wheel-dark text-white rounded-full text-2xl font-bold 
+                     hover:scale-105 transition-transform z-20 disabled:cursor-not-allowed bg-transparent"
           >
-            {"SPIN"}
+            {isSpinnig ? "" : ""}
           </button>
         </div>
       </div>
