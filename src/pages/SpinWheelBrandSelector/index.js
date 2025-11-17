@@ -5,12 +5,12 @@ import Burberry from "assets/images/Burberry-logo-1.png";
 import ECO from "assets/images/Eco-Logo-1.png";
 import Prada from "assets/images/Prada-Logo-1.png";
 import WinMessage from "components/winMessage";
-// import Tesla from "assets/images/Tesla-Logo-1.png";
-// import Armani from "assets/images/Armani-Logo-1.png";
-// import Gucci from "assets/images/Gucci-Logo-1.png";
-// import Natura from "assets/images/Natura-Logo-1.png";
+import Tesla from "assets/images/Tesla-Logo-1.png";
+import Armani from "assets/images/Armani-Logo-1.png";
+import Gucci from "assets/images/Gucci-Logo-1.png";
+import Natura from "assets/images/Natura-Logo-1.png";
 // import PointerSVG from "assets/images/pointer2.svg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { stopSpinning } from "store/slices/commonSlice";
 import { CustomSpinWheel } from "components/SpinWheel";
 const data = [
@@ -47,7 +47,9 @@ const data = [
 
 export default function SpinWheel() {
   const dispatch = useDispatch();
-  // const isSpinnig = useSelector((state) => state.commonState.isSpinning);
+  const selectedBrands = useSelector(
+    (state) => state.commonState.selectedBrands
+  );
   const [isSpinnig, setIsSpinnig] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [winner, setWinner] = useState("");
@@ -117,10 +119,15 @@ export default function SpinWheel() {
     return "";
   };
 
-  const imsList = [
-    { src: ECO, className: "h-16 w-34 mx-2" },
-    { src: Burberry, className: "h-16 w-36" },
-    { src: Prada, className: "h-16 w-34" },
+  const InterestedBrands = [
+    { id: 1, src: Burberry, className: "h-16 w-36" },
+    { id: 2, src: Armani, className: "h-16 w-34" },
+    { id: 3, src: Prada, className: "h-16 w-34" },
+    { id: 4, src: Gucci, className: "h-16 w-34" },
+    { id: 5, src: ECO, className: "h-16 w-34 mx-2" },
+    { id: 6, src: Tesla, className: "h-16 w-34" },
+    { id: 7, src: Natura, className: "h-16 w-34" },
+    { id: 8, src: ECO, className: "h-16 w-34" },
   ];
 
   // ✅ Redirect after win
@@ -136,7 +143,7 @@ export default function SpinWheel() {
 
   return (
     <MainCard variant={"spinner"}>
-      <div className="flex flex-col items-center mt-6">
+      <div className="flex flex-col items-center mt-3">
         {postWin ? (
           <h2 className="text-3xl text-black font-bold mb-8 text-center">
             YOU WON A{" "}
@@ -149,10 +156,12 @@ export default function SpinWheel() {
           </p>
         )}
 
-        <div className="flex mt-8 ">
+        <div className="flex mt-8 space-x-4">
           {!postWin &&
-            imsList.map((item, index) => (
-              <div key={index} className="w-1/3 flex justify-center">
+            InterestedBrands.filter((item) =>
+              selectedBrands.includes(item.id)
+            ).map((item, index) => (
+              <div key={index} className="w-1/3 ">
                 <img
                   src={item.src}
                   alt={`brand-logo-${index}`}
