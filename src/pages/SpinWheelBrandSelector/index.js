@@ -156,7 +156,7 @@ export default function SpinWheel() {
           </p>
         )}
 
-        <div className="flex mt-8 space-x-4">
+        <div className="flex mt-8 space-x-4 justify-center items-center">
           {!postWin &&
             InterestedBrands.filter((item) =>
               selectedBrands.includes(item.id)
