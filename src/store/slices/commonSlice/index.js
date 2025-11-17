@@ -135,10 +135,8 @@ export const commonSlice = createSlice({
 
     // Brand selection actions
     selectBrand: (state, action) => {
-      const brand = action.payload;
-      if (!state.selectedBrands.find((b) => b.id === brand.id)) {
-        state.selectedBrands.push(brand);
-      }
+      // const brands = action.payload;
+      state.selectedBrands = action.payload.brandIds;
     },
     removeBrand: (state, action) => {
       state.selectedBrands = state.selectedBrands.filter(

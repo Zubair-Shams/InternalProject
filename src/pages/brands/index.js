@@ -21,7 +21,7 @@ const Brands = () => {
       newSelected.add(brandId);
     }
     setSelectedBrands(newSelected);
-    dispatch(selectBrand({ brands: newSelected }));
+    dispatch(selectBrand({ brandIds: Array.from(newSelected) }));
   };
   return (
     <MainCard variant={"brands"}>
