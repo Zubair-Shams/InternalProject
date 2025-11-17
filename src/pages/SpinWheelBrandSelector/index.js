@@ -16,6 +16,7 @@ import { CustomSpinWheel } from "components/SpinWheel";
 const data = [
   {
     option: "Prada  15% OFF",
+    logo: Prada,
     style: {
       backgroundColor: "#FB8B00",
       textColor: "black",
@@ -24,6 +25,7 @@ const data = [
   },
   {
     option: "Burberry 25% OFF",
+    logo: Burberry,
     style: {
       backgroundColor: "#00ACC2",
       textColor: "black",
@@ -33,14 +35,17 @@ const data = [
   },
   {
     option: "ECO 20% OFF",
+    logo: ECO,
     style: { backgroundColor: "#F5F5F5", textColor: "#000", fontSize: 20 },
   },
   {
     option: "Prada 30% OFF",
+    logo: Prada,
     style: { backgroundColor: "#DF3B37", textColor: "black", fontSize: 20 },
   },
   {
     option: "Burberry  35% OFF",
+    logo: Burberry,
     style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 20 },
   },
 ];
@@ -78,10 +83,6 @@ export default function SpinWheel() {
     if (!isSpinnig) {
       const newPrizeNumber = Math.floor(Math.random() * data.length);
 
-      // in case if we rotate the wheel
-      // const adjustedPrizeNumber =
-      //   (newPrizeNumber + Math.floor(data.length / 2)) % data.length;
-
       setPrizeNumber(newPrizeNumber);
       setIsSpinnig(true);
       setWinner(null); // Clear previous winner
@@ -92,13 +93,16 @@ export default function SpinWheel() {
     setpostWin(true);
     setIsSpinnig(false);
     const winningOption = data[prizeNumber].option;
+    const logo = data[prizeNumber].logo;
     setWinner(winningOption);
     // Store the offer in Redux
+
     dispatch(
       stopSpinning({
         option: winningOption,
         brand: getWinnerBrandFromOption(winningOption),
         discount: getWinnerDiscountFromOption(winningOption),
+        logo,
       })
     );
   };
