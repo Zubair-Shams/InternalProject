@@ -157,12 +157,6 @@ export const CustomSpinWheel = ({
       ctx.save();
       ctx.translate(centerX, centerY - radius);
 
-      // Add shadow to pointer
-      ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-      ctx.shadowBlur = 10;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 5;
-
       ctx.beginPath();
       // Increased size: from -30, -20, 20, 10 to -45, -30, 30, 15
       ctx.moveTo(0, 15); // Point facing inward (flipped)
