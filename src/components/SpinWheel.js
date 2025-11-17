@@ -133,13 +133,6 @@ export const CustomSpinWheel = ({
       ctx.lineWidth = 20;
       ctx.stroke();
 
-      // Draw inner border
-      ctx.beginPath();
-      ctx.arc(0, 0, radius - 20, 0, 2 * Math.PI);
-      ctx.strokeStyle = "#000";
-      ctx.lineWidth = 3;
-      ctx.stroke();
-
       ctx.restore();
 
       // Draw center circle
@@ -160,16 +153,31 @@ export const CustomSpinWheel = ({
       ctx.fillText("SPIN", centerX, centerY);
       ctx.restore();
 
-      // Draw pointer at top
+      // Draw pointer at top (flipped to point inward with shadow and increased size)
       ctx.save();
       ctx.translate(centerX, centerY - radius);
+
+      // Add shadow to pointer
+      ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 5;
+
       ctx.beginPath();
-      ctx.moveTo(0, -30);
-      ctx.lineTo(-20, 10);
-      ctx.lineTo(20, 10);
+      // Increased size: from -30, -20, 20, 10 to -45, -30, 30, 15
+      ctx.moveTo(0, 15); // Point facing inward (flipped)
+      ctx.lineTo(-30, -45);
+      ctx.lineTo(30, -45);
       ctx.closePath();
       ctx.fillStyle = "#DF3B37";
       ctx.fill();
+
+      // Reset shadow for stroke
+      ctx.shadowColor = "transparent";
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+
       ctx.strokeStyle = "#000";
       ctx.lineWidth = 2;
       ctx.stroke();
