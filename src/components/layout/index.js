@@ -3,7 +3,7 @@ import BottomLogo from "assets/images/Spin Stable Logo Final Artwork BLK and WTE
 // Layout Component with background
 const GameLayout = ({ children }) => {
   return (
-    <div className="w-[100vw] relative overflow-hidden">
+    <div className="w-max-[100vw] relative overflow-hidden">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
