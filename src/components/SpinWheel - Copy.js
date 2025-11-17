@@ -65,6 +65,7 @@ export const CustomSpinWheel = ({
     }));
   }, [data]);
 
+  // Memoize drawWheel to prevent recreation on every render
   const drawWheel = useCallback(
     (currentRotation) => {
       const canvas = canvasRef.current;
@@ -96,13 +97,6 @@ export const CustomSpinWheel = ({
         // Draw segment border
         ctx.strokeStyle = "#000";
         ctx.lineWidth = 3;
-        ctx.stroke();
-
-        // Draw outer edge border for differentiation
-        ctx.beginPath();
-        ctx.arc(0, 0, radius, startAngle, endAngle);
-        ctx.strokeStyle = "#FFFFFF";
-        ctx.lineWidth = 2;
         ctx.stroke();
 
         // Draw text with improved layout (using pre-parsed text)
@@ -159,36 +153,17 @@ export const CustomSpinWheel = ({
       ctx.fillText("SPIN", centerX, centerY);
       ctx.restore();
 
-      // Draw pointer at top - pentagon/arrow shape matching the image
+      // Draw pointer at top (flipped to point inward with shadow and increased size)
       ctx.save();
-      ctx.translate(centerX, centerY - radius + 5);
-
-      // Add shadow to pointer
-      ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-      ctx.shadowBlur = 12;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 6;
-
-      // Pointer dimensions
-      const pointerWidth = 55; // Width of the flat top
-      const pointerHeight = 65; // Total height from top to point
-      const sideHeight = 40; // Height of the straight sides before angling to point
+      ctx.translate(centerX, centerY - radius);
 
       ctx.beginPath();
-      // Start at top-left corner
-      ctx.moveTo(-pointerWidth / 2, -pointerHeight + 5);
-      // Top edge (flat)
-      ctx.lineTo(pointerWidth / 2, -pointerHeight + 5);
-      // Right edge (straight down)
-      ctx.lineTo(pointerWidth / 2, -pointerHeight + sideHeight);
-      // Angle to bottom point (right side)
-      ctx.lineTo(0, 5);
-      // Angle to left side from point
-      ctx.lineTo(-pointerWidth / 2, -pointerHeight + sideHeight);
-      // Left edge (straight up)
+      // Increased size: from -30, -20, 20, 10 to -45, -30, 30, 15
+      ctx.moveTo(0, 15); // Point facing inward (flipped)
+      ctx.lineTo(-30, -45);
+      ctx.lineTo(30, -45);
       ctx.closePath();
-
-      ctx.fillStyle = "#C73933";
+      ctx.fillStyle = "#DF3B37";
       ctx.fill();
 
       // Reset shadow for stroke
@@ -197,21 +172,9 @@ export const CustomSpinWheel = ({
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
 
-      // Dark outline
-      ctx.strokeStyle = "#8B1A1A";
-      ctx.lineWidth = 3;
+      ctx.strokeStyle = "#000";
+      ctx.lineWidth = 2;
       ctx.stroke();
-
-      // Add a subtle inner shadow/gradient effect
-      ctx.save();
-      ctx.clip();
-      const gradient = ctx.createLinearGradient(0, -pointerHeight, 0, 5);
-      gradient.addColorStop(0, "rgba(255, 255, 255, 0.2)");
-      gradient.addColorStop(1, "rgba(0, 0, 0, 0.2)");
-      ctx.fillStyle = gradient;
-      ctx.fill();
-      ctx.restore();
-
       ctx.restore();
     },
     [wheelConfig, parsedSegments, size]
