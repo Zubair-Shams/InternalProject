@@ -161,7 +161,10 @@ export default function SpinWheel() {
             InterestedBrands.filter((item) =>
               selectedBrands.includes(item.id)
             ).map((item, index) => (
-              <div key={index} className="w-1/3 ">
+              <div
+                key={index}
+                className="flex-shrink-0 flex-grow-0 max-w-40 flex justify-center "
+              >
                 <img
                   src={item.src}
                   alt={`brand-logo-${index}`}
