@@ -1,11 +1,30 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import MainCard from "components/mainCard.js";
+import closeCircle from "assets/images/close-circle-white.svg";
+import tickIcon from "assets/images/tick.svg";
 import Button from "components/Button";
 import Input from "components/Form/input";
+import MainCard from "components/mainCard.js";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setUserData } from "store/slices/commonSlice";
+import Swal from "sweetalert2";
 
+function swalModal({ message, title, onConfirm }) {
+  Swal.fire({
+    icon: "success",
+    text: message,
+    showCloseButton: true,
+    iconColor: "rgba(245, 130, 32, 1)",
+    title: title ? title : "Error",
+    // confirmButtonColor: "var(--orange)",
+    iconHtml: `<img src="${tickIcon}" alt="Success" />`,
+    closeButtonHtml: `<img src="${closeCircle}" alt="Close" />`,
+  }).then((result) => {
+    if (result.isConfirmed && onConfirm) {
+      onConfirm();
+    }
+  });
+}
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -61,7 +80,13 @@ const Register = () => {
     // Save user data to Redux
     dispatch(setUserData(formData));
     // Navigate to thank you page
-    navigate("/thankyou");
+
+    swalModal({
+      title: "THANK YOU",
+      message:
+        "You’re all set. Your special offer is on its way to you! We hope you enjoy a fun day of shopping with your offer",
+      onConfirm: () => navigate("/brands"),
+    });
   };
 
   // Get offer information for display
@@ -77,11 +102,6 @@ const Register = () => {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center px-4 ">
       <MainCard variant={"register"}>
-        {/* THANK YOU PAGE CONTENT */}
-
-        {/* <p className="text-white text-3xl md:text-4xl font-normal">
-          We'd like to say
-        </p> */}
         <h2 className="text-black text-6xl md:text-7xl font-black uppercase">
           THANK YOU
         </h2>
