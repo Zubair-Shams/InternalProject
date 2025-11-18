@@ -18,14 +18,6 @@ const ThankYou = () => {
     return "your offer";
   };
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     navigate("/register");
-  //   }, 5000); // Increased to 5 seconds to give user time to read
-
-  //   return () => clearTimeout(timer); // cleanup
-  // }, [navigate]);
-
   return (
     <div className="min-h-screen flex flex-col justify-center items-center px-4 w-5/6">
       <MainCard

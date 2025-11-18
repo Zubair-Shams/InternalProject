@@ -36,7 +36,7 @@ const MainCard = ({
               {subHeading}
             </h2>
             <div className="text-center w-full ">
-              <p className="text-white text-5xl font-medium  w-[37rem] mx-auto">
+              <p className="text-white text-5xl font-medium  mx-auto">
                 {description}
               </p>
             </div>

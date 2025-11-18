@@ -45,9 +45,8 @@ const Brands = () => {
                       hover:shadow-md active:scale-95 w-full border-2 
                       ${
                         selectedBrands.has(brand.id)
-                          ? " border-primary bg-brand-selected"
-                          : // ? "ring-2 ring-primary bg-brand-selected border"
-                            "hover:bg-brand-hover border-transparent "
+                          ? " border-darkGreen bg-brand-selected"
+                          : "hover:bg-brand-hover border-transparent "
                       }
                     `}
               >
@@ -57,7 +56,7 @@ const Brands = () => {
                   className={brand.className}
                 />
                 {selectedBrands.has(brand.id) && (
-                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs font-bold">
+                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-darkGreen text-white rounded-full flex items-center justify-center text-xs font-bold">
                     ✓
                   </div>
                 )}

@@ -79,16 +79,17 @@ const Register = () => {
       <MainCard variant={"register"}>
         {/* THANK YOU PAGE CONTENT */}
 
-        <p className="text-white text-3xl md:text-4xl font-normal">
+        {/* <p className="text-white text-3xl md:text-4xl font-normal">
           We'd like to say
-        </p>
+        </p> */}
         <h2 className="text-black text-6xl md:text-7xl font-black uppercase">
           THANK YOU
         </h2>
         <p className="text-white text-2xl md:text-3xl font-normal max-w-3xl mx-auto px-4">
-          Congratulations! You won{" "}
-          <span className="font-bold text-yellow-300">{getOfferText()}</span>.
-          Your offer details will be sent to your email address shortly.
+          To get your{" "}
+          <span className="font-bold text-yellow-300">{getOfferText()}</span>
+          offer, <br></br> please fill out the form below. Your special offer
+          code will be sent to your phone through SMS and email{" "}
         </p>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
