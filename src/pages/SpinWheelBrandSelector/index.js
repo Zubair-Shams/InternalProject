@@ -1,5 +1,5 @@
 import MainCard from "components/mainCard.js";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Burberry from "assets/images/Burberry-logo-1.png";
 import ECO from "assets/images/Eco-Logo-1.png";
@@ -15,10 +15,7 @@ import {
   startSpinning,
   stopSpinning,
   setWinner,
-  nextStep,
-  setUserData,
-  selectBrand,
-  resetGame,
+  hideWinMessage,
 } from "store/slices/commonSlice";
 import { CustomSpinWheel } from "components/SpinWheel";
 const data = [
@@ -60,11 +57,28 @@ const data = [
 
 export default function SpinWheel() {
   const dispatch = useDispatch();
-  const { isSpinning, spinCount, selectedBrands, showWinMessage, winner } =
-    useSelector((state) => state.commonState);
+  const { isSpinning, selectedBrands, showWinMessage, winner } = useSelector(
+    (state) => state.commonState
+  );
   const [prizeNumber, setPrizeNumber] = useState(0);
+  const hasRedirectedRef = useRef(false);
+  const isInitialMount = useRef(true);
 
   const navigate = useNavigate(); // ✅ initialize router navigation
+
+  // Reset showWinMessage when component mounts (only if user comes back from another page)
+  // useEffect(() => {
+  //   if (isInitialMount.current) {
+  //     isInitialMount.current = false;
+  //     // On initial mount, if showWinMessage is true, it means user came back
+  //     // Reset it and allow new wins to work
+  //     if (showWinMessage) {
+  //       dispatch(hideWinMessage());
+  //       hasRedirectedRef.current = false;
+  //     }
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   // Helper functions to extract brand and discount from option text
   const getWinnerBrandFromOption = (option) => {
@@ -91,6 +105,7 @@ export default function SpinWheel() {
       dispatch(startSpinning());
 
       dispatch(setWinner({ winner: null })); // Clear previous winner
+      hasRedirectedRef.current = false; // Reset redirect flag for new spin
     }
   };
 
@@ -140,16 +155,18 @@ export default function SpinWheel() {
     { id: 8, src: ECO, className: "h-16 w-34" },
   ];
 
-  // ✅ Redirect after win
+  // ✅ Redirect after win (only once per win)
   useEffect(() => {
-    if (showWinMessage) {
+    if (showWinMessage && !hasRedirectedRef.current) {
+      hasRedirectedRef.current = true; // Mark that we've started the redirect process
       const timer = setTimeout(() => {
         navigate("/offer");
+        dispatch(hideWinMessage()); // Hide message after redirect
       }, 3000); // 3 sec delay
 
       return () => clearTimeout(timer); // cleanup
     }
-  }, [showWinMessage, navigate]);
+  }, [showWinMessage, navigate, dispatch]);
 
   return (
     <MainCard variant={"spinner"}>
