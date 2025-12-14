@@ -11,7 +11,15 @@ import Gucci from "assets/images/Gucci-Logo-1.png";
 import Natura from "assets/images/Natura-Logo-1.png";
 // import PointerSVG from "assets/images/pointer2.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { stopSpinning } from "store/slices/commonSlice";
+import {
+  startSpinning,
+  stopSpinning,
+  setWinner,
+  nextStep,
+  setUserData,
+  selectBrand,
+  resetGame,
+} from "store/slices/commonSlice";
 import { CustomSpinWheel } from "components/SpinWheel";
 const data = [
   {
@@ -52,13 +60,9 @@ const data = [
 
 export default function SpinWheel() {
   const dispatch = useDispatch();
-  const selectedBrands = useSelector(
-    (state) => state.commonState.selectedBrands
-  );
-  const [isSpinnig, setIsSpinnig] = useState(false);
+  const { isSpinning, spinCount, selectedBrands, showWinMessage, winner } =
+    useSelector((state) => state.commonState);
   const [prizeNumber, setPrizeNumber] = useState(0);
-  const [winner, setWinner] = useState("");
-  const [postWin, setpostWin] = useState(false);
 
   const navigate = useNavigate(); // ✅ initialize router navigation
 
@@ -80,26 +84,28 @@ export default function SpinWheel() {
   };
 
   const handleSpinClick = () => {
-    if (!isSpinnig) {
+    if (!isSpinning) {
       const newPrizeNumber = Math.floor(Math.random() * data.length);
 
       setPrizeNumber(newPrizeNumber);
-      setIsSpinnig(true);
-      setWinner(null); // Clear previous winner
+      dispatch(startSpinning());
+
+      dispatch(setWinner({ winner: null })); // Clear previous winner
     }
   };
 
   const handleStopSpinning = () => {
-    setpostWin(true);
-    setIsSpinnig(false);
     const winningOption = data[prizeNumber].option;
     const logo = data[prizeNumber].logo;
-    setWinner(winningOption);
-    // Store the offer in Redux
+    console.log("on stop spinning", winningOption);
 
+    // Set winner in Redux
+    dispatch(setWinner({ winner: winningOption }));
+
+    // Store the offer in Redux
     dispatch(
       stopSpinning({
-        option: winningOption,
+        currentPrize: winningOption,
         brand: getWinnerBrandFromOption(winningOption),
         discount: getWinnerDiscountFromOption(winningOption),
         logo,
@@ -136,19 +142,19 @@ export default function SpinWheel() {
 
   // ✅ Redirect after win
   useEffect(() => {
-    if (postWin) {
+    if (showWinMessage) {
       const timer = setTimeout(() => {
         navigate("/offer");
       }, 3000); // 3 sec delay
 
       return () => clearTimeout(timer); // cleanup
     }
-  }, [postWin, navigate]);
+  }, [showWinMessage, navigate]);
 
   return (
     <MainCard variant={"spinner"}>
       <div className="flex flex-col items-center mt-3">
-        {postWin ? (
+        {showWinMessage ? (
           <h2 className="text-3xl text-black font-bold mb-8 text-center">
             YOU WON A{" "}
             <span className="text-red-600">{getWinnerDiscount()}</span> DISCOUNT
@@ -161,7 +167,7 @@ export default function SpinWheel() {
         )}
 
         <div className="flex mt-8 space-x-4 justify-center items-center">
-          {!postWin &&
+          {!showWinMessage &&
             InterestedBrands.filter((item) =>
               selectedBrands.includes(item.id)
             ).map((item, index) => (
@@ -177,7 +183,7 @@ export default function SpinWheel() {
               </div>
             ))}
         </div>
-        {postWin && (
+        {showWinMessage && (
           <div className="w-[70vw] fixed bottom-0 left-1/2 -translate-x-1/2 z-50">
             <WinMessage />
           </div>
@@ -185,7 +191,7 @@ export default function SpinWheel() {
         <div className="fixed  bottom-0 translate-y-[17rem] transform  z-10">
           <CustomSpinWheel
             data={data}
-            mustStartSpinning={isSpinnig}
+            mustStartSpinning={isSpinning}
             prizeNumber={prizeNumber}
             onStopSpinning={handleStopSpinning}
             size={700}
@@ -193,12 +199,12 @@ export default function SpinWheel() {
 
           <button
             onClick={handleSpinClick}
-            disabled={isSpinnig}
+            disabled={isSpinning}
             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  
                      size-32 rounded-full text-white  text-2xl font-bold 
                      hover:scale-105 transition-transform z-20 disabled:cursor-not-allowed bg-transparent`}
           >
-            {isSpinnig ? "" : ""}
+            {isSpinning ? "" : ""}
           </button>
         </div>
       </div>
