@@ -13,9 +13,10 @@ const initState = {
   // Game state
   isSpinning: false,
   hasSpun: false,
-  currentPrize: null,
+  currentPrize: { logo: "", discount: "" },
   spinCount: 0,
   maxSpins: 3,
+  winner: null,
 
   // User data
   userData: {
@@ -100,6 +101,14 @@ export const commonSlice = createSlice({
   initialState: initState,
   reducers: {
     // Game control actions
+    setWinner: (state, action) => {
+      // Handle both object payload { winner: value } and direct string value
+      if (typeof action.payload === "object" && action.payload !== null) {
+        state.winner = action.payload.winner;
+      } else {
+        state.winner = action.payload;
+      }
+    },
     startSpinning: (state) => {
       state.isSpinning = true;
       state.showWinMessage = false;
@@ -118,6 +127,7 @@ export const commonSlice = createSlice({
       state.spinCount = 0;
       state.showWinMessage = false;
       state.isGameCompleted = false;
+      state.winner = null;
     },
 
     // User data actions
@@ -197,6 +207,7 @@ export const commonSlice = createSlice({
 
 export const {
   // Game control actions
+  setWinner,
   startSpinning,
   stopSpinning,
   resetGame,
