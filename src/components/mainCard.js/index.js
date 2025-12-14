@@ -2,7 +2,7 @@ import React from "react";
 import ButterflyLeft from "assets/images/Butterfly-1.png";
 import ECU from "assets/images/Eco-Logo-1.png";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const VARIANTS_WITHOUT_TOP_LOGO = [
   "offer",
@@ -22,6 +22,11 @@ const MainCard = ({
   children,
 }) => {
   const Navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if current route is home page
+  const isHomePage = location.pathname === "/";
+
   // Pre-calculate split description for "offer" case
 
   const renderContent = () => {
@@ -91,9 +96,33 @@ const MainCard = ({
 
   return (
     <div className="w-full">
-      <h1 className="text-7xl md:text-7xl font-bold text-red-600 mb-12 text-center ">
-        SPIN, WIN & SAVE
-      </h1>
+      <div className="flex items-center justify-between mb-12">
+        <div className="w-1/3 flex justify-center">
+          <div className="bg-white/20 backdrop-blur-sm rounded-lg px-12 py-6 w-64 h-[85px]">
+            <Link to={"/"}>
+              <span className="text-gray-600 text-3xl font-bold">
+                CLIENT LOGO
+              </span>
+            </Link>
+          </div>
+        </div>
+        <div className="w-1/3">
+          <h1 className="text-7xl md:text-7xl font-bold text-red-600">
+            SPIN, WIN & SAVE
+          </h1>
+        </div>
+        <div className="w-1/3">
+          {!isHomePage && (
+            <Link
+              to={"/spinwheel"}
+              className="min-w-[14rem] bg-darkGreen  w-auto  text-white px-8 py-2 rounded-xl font-semibold text-3xl"
+            >
+              Restart spinner
+            </Link>
+          )}
+        </div>
+      </div>
+
       <div
         className={`relative rounded-lg p-6  min-w-[45vw] max-w-[50vw] min-h-[50vh] mx-auto no-scrollbar ${
           variant !== "spinner" ? "border-[14px] border-solid shadow-lg" : ""
