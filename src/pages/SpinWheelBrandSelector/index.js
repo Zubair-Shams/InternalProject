@@ -1,15 +1,19 @@
+import React, { useState, useEffect, useRef, useMemo } from "react"; // ✅ Imported useMemo
+// @ import components
 import MainCard from "components/mainCard.js";
-import React, { useState, useEffect, useRef } from "react";
+import { CustomSpinWheel } from "components/SpinWheel";
+// @ import dependencies
 import { useNavigate } from "react-router-dom";
-import Burberry from "assets/images/Burberry-logo-1.png";
+// @ import Media
 import ECO from "assets/images/Eco-Logo-1.png";
-import Prada from "assets/images/Prada-Logo-1.png";
 import WinMessage from "components/winMessage";
-import Tesla from "assets/images/Tesla-Logo-1.png";
-import Armani from "assets/images/Armani-Logo-1.png";
 import Gucci from "assets/images/Gucci-Logo-1.png";
+import Tesla from "assets/images/Tesla-Logo-1.png";
+import Prada from "assets/images/Prada-Logo-1.png";
+import Armani from "assets/images/Armani-Logo-1.png";
 import Natura from "assets/images/Natura-Logo-1.png";
-// import PointerSVG from "assets/images/pointer2.svg";
+import Burberry from "assets/images/Burberry-logo-1.png";
+// @ import store
 import { useDispatch, useSelector } from "react-redux";
 import {
   startSpinning,
@@ -17,18 +21,10 @@ import {
   setWinner,
   hideWinMessage,
 } from "store/slices/commonSlice";
-import { CustomSpinWheel } from "components/SpinWheel";
-const data = [
+
+const MASTER_DATA = [
   {
-    option: "Prada  15% OFF",
-    logo: Prada,
-    style: {
-      backgroundColor: "#FB8B00",
-      textColor: "black",
-      fontSize: 20,
-    },
-  },
-  {
+    id: 1,
     option: "Burberry 25% OFF",
     logo: Burberry,
     style: {
@@ -39,19 +35,44 @@ const data = [
     },
   },
   {
-    option: "ECO 20% OFF",
+    id: 2,
+    option: "Giorgio_Armani 25% OFF",
+    logo: Armani,
+    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 20 },
+  },
+  {
+    id: 3,
+    option: "Prada 15% OFF",
+    logo: Prada,
+    style: {
+      backgroundColor: "#FB8B00",
+      textColor: "black",
+      fontSize: 20,
+    },
+  },
+  {
+    id: 4,
+    option: "Gucci 15% OFF",
+    logo: Gucci,
+    style: { backgroundColor: "#F5F5F5", textColor: "#000", fontSize: 20 },
+  },
+  {
+    id: 5,
+    option: "ECO 40% OFF",
     logo: ECO,
     style: { backgroundColor: "#F5F5F5", textColor: "#000", fontSize: 20 },
   },
   {
-    option: "Prada 30% OFF",
-    logo: Prada,
-    style: { backgroundColor: "#DF3B37", textColor: "black", fontSize: 20 },
+    id: 6,
+    option: "Tesla 30% OFF",
+    logo: Tesla,
+    style: { backgroundColor: "#DF9B30", textColor: "black", fontSize: 20 },
   },
   {
-    option: "Burberry  35% OFF",
-    logo: Burberry,
-    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 20 },
+    id: 7,
+    option: "Natura 10% OFF",
+    logo: Natura,
+    style: { backgroundColor: "#087530", textColor: "#000", fontSize: 20 },
   },
 ];
 
@@ -62,9 +83,14 @@ export default function SpinWheel() {
   );
   const [prizeNumber, setPrizeNumber] = useState(0);
   const hasRedirectedRef = useRef(false);
-  const navigate = useNavigate(); // ✅ initialize router navigation
+  const navigate = useNavigate();
 
-  // Helper functions to extract brand and discount from option text
+  // ✅ Wrapped dynamicData calculation in useMemo
+  const dynamicData = useMemo(() => {
+    return MASTER_DATA.filter((item) => selectedBrands.includes(item.id));
+  }, [selectedBrands]); // Dependency array ensures recalculation only when selectedBrands changes
+
+  // Helper functions (remain unchanged)
   const getWinnerBrandFromOption = (option) => {
     if (!!option) {
       const spaceIndex = option.indexOf(" ");
@@ -82,34 +108,38 @@ export default function SpinWheel() {
   };
 
   const handleSpinClick = () => {
-    if (!isSpinning) {
-      const newPrizeNumber = Math.floor(Math.random() * data.length);
+    if (!isSpinning && dynamicData.length > 0) {
+      const newPrizeNumber = Math.floor(Math.random() * dynamicData.length);
 
       setPrizeNumber(newPrizeNumber);
       dispatch(startSpinning());
 
-      dispatch(setWinner({ winner: null })); // Clear previous winner
-      hasRedirectedRef.current = false; // Reset redirect flag for new spin
+      dispatch(setWinner({ winner: null }));
+      hasRedirectedRef.current = false;
+    } else if (dynamicData.length === 0) {
+      alert("Please select at least one brand to spin the wheel.");
     }
   };
 
   const handleStopSpinning = () => {
-    const winningOption = data[prizeNumber].option;
-    const logo = data[prizeNumber].logo;
-    console.log("on stop spinning", winningOption);
+    if (dynamicData.length > 0) {
+      const winningOption = dynamicData[prizeNumber].option;
+      const logo = dynamicData[prizeNumber].logo;
+      console.log("on stop spinning", winningOption);
 
-    // Set winner in Redux
-    dispatch(setWinner({ winner: winningOption }));
+      // Set winner in Redux
+      dispatch(setWinner({ winner: winningOption }));
 
-    // Store the offer in Redux
-    dispatch(
-      stopSpinning({
-        currentPrize: winningOption,
-        brand: getWinnerBrandFromOption(winningOption),
-        discount: getWinnerDiscountFromOption(winningOption),
-        logo,
-      })
-    );
+      // Store the offer in Redux
+      dispatch(
+        stopSpinning({
+          currentPrize: winningOption,
+          brand: getWinnerBrandFromOption(winningOption),
+          discount: getWinnerDiscountFromOption(winningOption),
+          logo,
+        })
+      );
+    }
   };
 
   const getWinnerBrand = () => {
@@ -136,19 +166,18 @@ export default function SpinWheel() {
     { id: 5, src: ECO, className: "h-16 w-34 mx-2" },
     { id: 6, src: Tesla, className: "h-16 w-34" },
     { id: 7, src: Natura, className: "h-16 w-34" },
-    { id: 8, src: ECO, className: "h-16 w-34" },
   ];
 
-  // ✅ Redirect after win (only once per win)
+  // Redirect logic (remain unchanged)
   useEffect(() => {
     if (showWinMessage && !hasRedirectedRef.current) {
-      hasRedirectedRef.current = true; // Mark that we've started the redirect process
+      hasRedirectedRef.current = true;
       const timer = setTimeout(() => {
         navigate("/offer");
-        dispatch(hideWinMessage()); // Hide message after redirect
-      }, 3000); // 3 sec delay
+        dispatch(hideWinMessage());
+      }, 3000);
 
-      return () => clearTimeout(timer); // cleanup
+      return () => clearTimeout(timer);
     }
   }, [showWinMessage, navigate, dispatch]);
 
@@ -191,7 +220,7 @@ export default function SpinWheel() {
         )}
         <div className="fixed  bottom-0 translate-y-[17rem] transform  z-10">
           <CustomSpinWheel
-            data={data}
+            data={dynamicData}
             mustStartSpinning={isSpinning}
             prizeNumber={prizeNumber}
             onStopSpinning={handleStopSpinning}
@@ -200,7 +229,7 @@ export default function SpinWheel() {
 
           <button
             onClick={handleSpinClick}
-            disabled={isSpinning}
+            disabled={isSpinning || dynamicData.length === 0}
             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  
                      size-32 rounded-full text-white  text-2xl font-bold 
                      hover:scale-105 transition-transform z-20 disabled:cursor-not-allowed bg-transparent`}
