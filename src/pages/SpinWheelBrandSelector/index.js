@@ -62,23 +62,7 @@ export default function SpinWheel() {
   );
   const [prizeNumber, setPrizeNumber] = useState(0);
   const hasRedirectedRef = useRef(false);
-  const isInitialMount = useRef(true);
-
   const navigate = useNavigate(); // ✅ initialize router navigation
-
-  // Reset showWinMessage when component mounts (only if user comes back from another page)
-  // useEffect(() => {
-  //   if (isInitialMount.current) {
-  //     isInitialMount.current = false;
-  //     // On initial mount, if showWinMessage is true, it means user came back
-  //     // Reset it and allow new wins to work
-  //     if (showWinMessage) {
-  //       dispatch(hideWinMessage());
-  //       hasRedirectedRef.current = false;
-  //     }
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   // Helper functions to extract brand and discount from option text
   const getWinnerBrandFromOption = (option) => {
