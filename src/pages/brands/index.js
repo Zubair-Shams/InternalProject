@@ -67,8 +67,17 @@ const Brands = () => {
 
         <Button
           title={" Tap for more options"}
-          classes="bg-darkGreen mt-4 w-auto  text-white px-12 py-5 rounded-xl font-semibold text-3xl"
-          onClick={() => Navigate("/spinwheel")}
+          classes={`mt-4 w-auto px-12 py-5 rounded-xl font-semibold text-3xl ${
+            selectedBrands.size > 0
+              ? "bg-darkGreen text-white"
+              : "bg-gray-400 text-white/70 cursor-not-allowed"
+          }`}
+          disabled={selectedBrands.size === 0}
+          onClick={() => {
+            if (selectedBrands.size > 0) {
+              Navigate("/spinwheel");
+            }
+          }}
         />
         <img
           src={ButterFluBottomLeft}
