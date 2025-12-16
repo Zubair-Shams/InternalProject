@@ -96,26 +96,26 @@ const MainCard = ({
 
   return (
     <div className="w-full">
-      <div className="flex items-center justify-between mb-12">
-        <div className="w-1/3 flex justify-center">
-          <div className="bg-white/20 backdrop-blur-sm rounded-lg px-12 py-6 w-64 h-[85px]">
+      <div className="flex items-center justify-between mb-4">
+        <div className="w-1/5 flex justify-center">
+          <div className="bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2 xl:px-4  md:px-6 xl:py-6 md:py-3 w-64 h-12 xl:h-[85px]  md:h-[60px]">
             <Link to={"/"}>
-              <span className="text-gray-600 text-3xl font-bold">
+              <span className="text-gray-600 xl:text-3xl text-xl md:text-3xl font-bold">
                 CLIENT LOGO
               </span>
             </Link>
           </div>
         </div>
-        <div className="w-1/3">
-          <h1 className="text-7xl md:text-7xl font-bold text-red-600">
+        <div className=" w-3/5">
+          <h1 className="text-4xl md:text-7xl font-bold text-red-600">
             SPIN, WIN & SAVE
           </h1>
         </div>
-        <div className="w-1/3">
+        <div className="w-1/5">
           {!isHomePage && (
             <Link
               to={"/spinwheel"}
-              className="min-w-[14rem] bg-darkGreen  w-auto  text-white px-8 py-2 rounded-xl font-semibold text-3xl"
+              className=" bg-darkGreen  w-auto  text-white px-5 py-1 xl:px-8 xl:py-2 rounded font-medium  xl:font-semibold text-2xl xl:text-3xl"
             >
               Restart spinner
             </Link>
