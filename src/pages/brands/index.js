@@ -29,11 +29,11 @@ const Brands = () => {
         <div className="text-center text-white/80 text-4xl">
           <p>Top 3 brands that interest you today:</p>
         </div>
-        <div className="flex flex-wrap mb-6 md:justify-center">
+        <div className="flex flex-wrap mb-3 md:justify-center">
           {brands.map((brand, index) => (
             <div
               key={brand.id}
-              className={`w-6/12 my-3 px-2 ${
+              className={`w-6/12 my-2 px-2 ${
                 index === brands.length - 1 ? "flex justify-center " : ""
               }`}
             >
