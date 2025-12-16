@@ -38,14 +38,14 @@ const MASTER_DATA = [
     id: 2,
     option: "Giorgio_Armani 25% OFF",
     logo: Armani,
-    style: { backgroundColor: "#00ACC2", textColor: "black", fontSize: 20 },
+    style: { backgroundColor: "#EDC179", textColor: "black", fontSize: 16 },
   },
   {
     id: 3,
     option: "Prada 15% OFF",
     logo: Prada,
     style: {
-      backgroundColor: "#FB8B00",
+      backgroundColor: "#955C40",
       textColor: "black",
       fontSize: 20,
     },
@@ -54,7 +54,7 @@ const MASTER_DATA = [
     id: 4,
     option: "Gucci 15% OFF",
     logo: Gucci,
-    style: { backgroundColor: "#F5F5F5", textColor: "#000", fontSize: 20 },
+    style: { backgroundColor: "#0D9494", textColor: "#000", fontSize: 20 },
   },
   {
     id: 5,
@@ -191,12 +191,12 @@ export default function SpinWheel() {
             FROM {getWinnerBrand()}
           </h2>
         ) : (
-          <p className="text-2xl text-black/80 mb-3">
+          <p className="text-2xl text-black/80 mb-2">
             The Brands you are interested in today are:
           </p>
         )}
 
-        <div className="flex mt-8 space-x-4 justify-center items-center">
+        <div className="flex mt-3 space-x-4 justify-center items-center">
           {!showWinMessage &&
             InterestedBrands.filter((item) =>
               selectedBrands.includes(item.id)
