@@ -100,7 +100,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 ">
+    <div className="min-h-screen flex flex-col justify-center items-center px-4 w-full">
       <MainCard variant={"register"}>
         <h2 className="text-black text-6xl md:text-7xl font-black uppercase">
           THANK YOU
