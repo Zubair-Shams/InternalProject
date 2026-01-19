@@ -114,7 +114,7 @@ const MainCard = ({
         <div className="w-1/5">
           {!isHomePage && (
             <Link
-              to={"/spinwheel"}
+              to={"/"}
               className=" bg-darkGreen  w-auto  text-white px-5 py-1 xl:px-8 xl:py-2 rounded font-medium  xl:font-semibold text-2xl xl:text-3xl"
             >
               Restart spinner
