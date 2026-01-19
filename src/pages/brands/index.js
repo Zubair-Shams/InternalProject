@@ -66,7 +66,7 @@ const Brands = () => {
         </div>
 
         <Button
-          title={" Tap for more options"}
+          title={" Tap to Spin to Win!"}
           classes={`mt-4 w-auto px-12 py-5 rounded-xl font-semibold text-3xl ${
             selectedBrands.size > 0
               ? "bg-darkGreen text-white"
