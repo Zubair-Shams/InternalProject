@@ -68,11 +68,11 @@ const Brands = () => {
         <Button
           title={" Tap to Spin to Win!"}
           classes={`mt-4 w-auto px-12 py-5 rounded-xl font-semibold text-3xl ${
-            selectedBrands.size > 0
+            selectedBrands.size >= 3
               ? "bg-darkGreen text-white"
               : "bg-gray-400 text-white/70 cursor-not-allowed"
           }`}
-          disabled={selectedBrands.size === 0}
+          disabled={selectedBrands.size < 3}
           onClick={() => {
             if (selectedBrands.size > 0) {
               Navigate("/spinwheel");
