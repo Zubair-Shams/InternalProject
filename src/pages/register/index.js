@@ -107,7 +107,7 @@ const Register = () => {
         </h2>
         <p className="text-white text-2xl md:text-3xl font-normal max-w-3xl mx-auto px-4">
           To get your{" "}
-          <span className="font-bold text-yellow-300">{getOfferText()} </span>
+          <span className="font-bold text-yellow-300">{getOfferText()}{" "}</span>
           offer, <br></br> please fill out the form below. Your special offer
           code will be sent to your phone through SMS and email{" "}
         </p>
