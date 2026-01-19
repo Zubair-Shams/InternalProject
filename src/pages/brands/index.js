@@ -17,7 +17,7 @@ const Brands = () => {
     const newSelected = new Set(selectedBrands);
     if (newSelected.has(brandId)) {
       newSelected.delete(brandId);
-    } else if (newSelected.size < 3) {
+    } else  {
       newSelected.add(brandId);
     }
     setSelectedBrands(newSelected);
